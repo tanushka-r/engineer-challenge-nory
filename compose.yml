@@ -1,0 +1,23 @@
+---
+
+services:
+  postgres:
+    image: postgres:15.4
+    ports:
+      - 6679:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: weird_salads_javascript_development
+    healthcheck:
+      test: pg_isready -d postgres -U postgres
+      start_period: 10s
+      start_interval: 1s
+      timeout: 500ms
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./db/db_bootstrap.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  postgres-data:
