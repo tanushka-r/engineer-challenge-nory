@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { db } from './db';
+import { db } from './lib/db';
 import { staff } from './drizzle/schema/staff';
 import cors from 'cors';
 

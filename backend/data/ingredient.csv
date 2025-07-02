@@ -1,0 +1,481 @@
+name,cost,unitId
+Yoghurt,3.03,1
+Arugula,3.77,1
+Gula Melaka,0.53,1
+Mahlab,2.99,2
+Parmesan Cheese,2.25,3
+Barberry,2.35,2
+Juniper Berries,3.6,2
+Lettuce,2.96,4
+Fingerlime,3.51,2
+Watermelon,0.84,4
+Dashi,0.72,2
+Rockmelon,0.89,2
+Green Tea Noodles,4,2
+Nashi Pear,2.87,4
+Eggs,1.95,1
+Corn Oil,0.63,3
+Cranberry,1.71,3
+Farmed Prawns,3.52,1
+Apple Juice Concentrate,2.93,4
+Pine Nut,3.09,4
+Chia Seeds,3.7,1
+Kiwi Fruit,0.8,4
+Turkey,0.05,4
+Chickpea,3.02,1
+Sesame Seeds,0.57,1
+Cannellini Beans,1.94,1
+Kumera,3.79,2
+Dried Chinese Broccoli,0.98,3
+Tinned,3.26,2
+Kidneys,2.37,4
+Broccoli,2.11,4
+Mackerel,0.95,4
+Borlotti Beans,2.32,1
+Rhubarb,0.29,1
+Spelt,3.07,1
+Sunflower Seeds,1.25,1
+Papaya,3.7,3
+Cocoa Powder,2.75,1
+Haloumi,2.65,1
+Blueberries,2.51,2
+Clams,2.06,1
+Wholegrain Bread,1.62,3
+Arrowroot,4,1
+Tea Oil,1.56,1
+Polenta,0.11,2
+Blackberries,3.81,3
+Kidney Beans,3.24,3
+Cherries,3.25,4
+Canola Oil,3.63,4
+Pumpkin Seed,2.51,4
+Kudzu,2.74,3
+Peaches,2.19,1
+Pork,0.03,4
+Tomatoes,2.79,3
+Hijiki,3.63,3
+Ham,0.17,3
+Lime Leaves,2.91,1
+Brown Rice,1.2,3
+Rice Paper,0.65,2
+Plums,2.9,1
+Salmon,2.55,2
+Fruit,0.62,1
+Scallops,2,2
+Goat Cheese,1.33,4
+Berries,2.07,1
+Apples,1.06,2
+Shiitake Mushrooms,0.16,1
+Vanilla Beans,3.62,2
+Safflower Oil,0.34,4
+Buckwheat Noodles,3.99,2
+Apple Juice,0.68,3
+Honey,2.07,3
+Olive Oil,0.93,2
+Paprik,2.87,2
+Wakame,2.07,1
+Peppermint,2.46,3
+Trout,0.36,3
+Annatto Seed,2.8,2
+Rye,1.28,4
+Cavalo,0.58,4
+Besan,0.93,3
+Pears,2.17,3
+Squash,3.4,2
+Star Anise,3.46,3
+Butternut Lettuce,3.04,3
+Fennel Seeds,3.23,3
+Malt Vinegar,0.05,4
+Brazil Nut,3.49,2
+Soy Beans,1.2,2
+Rye Bread,0.04,3
+Ricotta,3.2,1
+Cassia bark,2.61,2
+Galangal,0.17,3
+Loquats,2.8,2
+Hokkien Noodles,1.12,2
+Brie,3,1
+Cos Lettuce,3.84,3
+Corella Pear,2.58,3
+Pepitas,1.93,1
+Apple Cider Vinegar,2.82,2
+Tom Yum,1.25,3
+Arborio Rice,0.67,3
+Hazelnut,2.71,4
+Raspberry,2.19,2
+Eggplant,1.01,2
+Onion,3.03,3
+Pinto Beans,3.79,1
+Mastic,3.74,2
+Nutritional Yeast,3.33,3
+Tapioca,1.35,3
+English Spinach,3.19,2
+Pear Juice,2.88,3
+Oranges,3.83,1
+Watercress,1.74,4
+Mint,3.32,4
+Kenchur,1,2
+Yogurt,2.03,4
+Red Wine,2.44,3
+Molasses,2.12,4
+Omega Spread,2.53,3
+Alfalfa,3.94,4
+Dark Chocolate,2.6,4
+Gruyere,3.6,1
+Soy Milk,1.24,3
+Red Cabbage,1.72,3
+Oyster Sauce,2.57,4
+Bulghur,0.33,1
+Cardamom,3.25,1
+Mullet,1.29,2
+Star Fruit,0.78,2
+Mussels,1.62,3
+Milk Chocolate,0.15,4
+Squid,2.19,4
+Cucumber,0.11,2
+Rice Noodles,0.15,4
+Blue Swimmer Crab,2.32,3
+Pasta,1.38,2
+Currants,1.53,3
+Balsamic Vinegar,2.76,3
+Bamboo Shoots,0.66,2
+Common Cultivated Mushrooms,2.51,1
+Oyster Mushrooms,3.63,1
+Flaxseed Oil,0.91,2
+Taleggio Cheese,2.73,1
+Garlic,0.85,4
+Cashews,3.85,2
+Shark,2.54,4
+Red Wine Vinegar,2.63,1
+Fish Stock,1.44,1
+Soy,1.37,4
+Yellowtail Kingfish,2.58,2
+Cous Cous,2.49,3
+Blue Eye Trevalla,1.77,2
+Camomile,3.5,3
+Vegetable Spaghetti,0.86,1
+Sweet Potato,0.26,1
+Peppers,3.84,3
+Licorice,2.33,3
+Blue Cheese,1.26,3
+Snapper,0.85,3
+Persimmon,2.72,1
+Flour,1.59,3
+Black Eyed Beans,0.15,4
+Quinoa,0.06,3
+Sprouts,3.63,1
+Guava,3.68,2
+Brown Flour,3.4,3
+Basil Basmati Rice,1.84,4
+Buckwheat,3.04,2
+Lentils,2.39,2
+Turnips,2.24,3
+Dried Apricots,2.18,2
+Cottage Cheese,0.68,1
+Parsley,3.1,2
+Smoked Trout,1.05,3
+Provolone,3.97,1
+Lychees,3,4
+Allspice,1.17,3
+Wasabi,1.25,2
+Jicama,3.01,4
+Brussels Sprouts,0.34,2
+Mung Beans,0.39,4
+Barley,3.25,2
+Tangelo,1.19,2
+Fromage Blanc,2.36,1
+Mountain Bread,3.89,1
+Thyme,3.85,2
+Wholewheat Flour,0.8,1
+Capers,2.2,4
+Longan,1.82,1
+Purple Rice,1.22,4
+Whiting Wild Rice,1.36,3
+Kale,3.66,3
+Sardines,2.23,1
+Feijoa,3.67,2
+Tahini,1.12,2
+Mango,1,2
+Tamari,2.66,3
+Amaranth,1.9,3
+Goat Milk,1.01,4
+Macadamia Nut,3.95,1
+Slivered Almonds,3.43,1
+Red Pepper,1.18,3
+Oats,2.76,3
+Cloves,1.05,4
+Coconut Water,3.23,3
+Bran,3.1,4
+Cayenne,0.19,3
+Almond Oil,0.43,4
+Okra,2.02,4
+Oregano,3.11,1
+Maple Syrup,0.84,4
+Bonito Flakes,2.59,3
+Vegetable Oil,0.93,1
+White Bread,0.93,3
+Aubergine,1.44,1
+Albacore Tuna,0.57,4
+Chilli Pepper,3.58,3
+Cornmeal,0.45,2
+Soy Flour,0.43,4
+Carrot,2.28,2
+Cacao,0.94,1
+Amchur,3.02,4
+Marigold,0.7,2
+Tea,0.68,1
+Cake,3.02,1
+Coffee,1.72,4
+Rosemary,2.12,3
+Radicchio,0.79,4
+Kohlrabi,0.82,2
+Melon,1.15,4
+Mace,0.31,2
+Rice Syrup,2.57,1
+Mahi Mahi,0.08,3
+Chestnut,3.49,2
+Flounder,0.26,3
+Cheddar,3.62,3
+Baking Soda,0.77,1
+Bok Choy,0.02,4
+Tarragon,1.11,3
+Asian Greens,1.87,2
+Choy Sum,3.33,1
+Limes,2.81,4
+Tempeh,1.59,4
+Chickory,1.73,1
+Walnut,1.42,4
+Purple Carrot,2.79,2
+Parrotfish,2.33,2
+Dates,2.37,1
+Potato Flour,1.1,3
+Elderberry,1.61,4
+Hummus,3.64,4
+Kecap Manis,1.23,2
+Dill,1.42,1
+Marjoram,3.42,4
+Radish,2.24,1
+Pistachio Nut,2.93,1
+Hiramasa Kingfish,2.11,2
+Vermicelli Noodles,3.77,4
+Saffron,2.13,1
+Green Pepper,2.39,4
+Tapioca Flour,2.48,3
+Lobster,1.45,1
+Sesame Oil,0.91,4
+Asparagus,1.73,3
+Vegetable Stock,0.8,3
+Coriander Seed,2.15,4
+Jewfish,0.92,2
+Fresh Chillies,1.77,4
+Adzuki Beans,1.71,2
+Curry Leaves,0.09,3
+Bean Shoots,3.49,1
+Feta,3.17,2
+Cauliflower,0.14,4
+Nectarines,3.99,1
+Celery Seed,2.84,1
+Soymilk,0.47,2
+Bacon,0.27,1
+Chicken Stock,0.16,2
+Honeydew Melon,2.57,1
+Avocado Spread,2.89,1
+Camellia Tea Oil,1.45,4
+Lemongrass,2.58,1
+Cream Cheese,1.56,4
+File Powder,0.1,2
+Red Lentils,2.16,1
+Cinnamon,2.54,4
+Fish Sauce,2.78,2
+Muesli,0.79,2
+Pear,1.91,3
+Kokam,2.15,4
+Aniseed,2.26,3
+Grape Seed Oil,0.92,4
+Garam Masala,3.24,1
+Edam,3.39,4
+Artichoke,0.23,2
+Rice Flour,2.78,2
+Barramundi,2.54,2
+Flat Mushrooms,1.95,2
+Mustard,2.75,3
+Crabs,2.88,4
+Almonds,1.13,4
+Brown Mushrooms,1.63,3
+Cumin,0.36,1
+Chives,1.42,4
+Mustard Seed,2.77,1
+Oat Flour,1.4,1
+Water,0.67,3
+Calamari,3.15,3
+Endive,1.54,4
+Jarrahdale Pumpkin,1.24,3
+Pineapple,0.57,2
+Monkfish,3.6,3
+Jasmine Rice,2.69,1
+Celery,1.22,4
+Horseradish,2.86,3
+Leeks,1.06,1
+Enoki Mushrooms,1.42,3
+Edamame,2.11,3
+William Pear,3.91,4
+Porcini Mushrooms,0.54,2
+Liver,3.34,2
+Dragonfruit,2.76,1
+Chicken,2.29,4
+Turmeric,0.66,1
+Avocado Oil,0.43,2
+Sultanas,3.55,2
+Rose Water,3.67,3
+Mandarins,1.85,4
+Spelt Bread,3.98,3
+Unbleached Flour,1.95,4
+Wheat,3.13,1
+Bay Leaves,3.64,2
+Sun-Dried Tomatoes,2.58,2
+Brown Rice Vinegar,1.98,3
+Figs,3.12,1
+Ajowan Seed,0.06,4
+Camembert,1.91,2
+Yellow Papaw,1.12,2
+White rice,1.44,2
+Yeast,0.5,1
+Flaxseed,2.49,3
+Greenwheat Freekeh,0.7,2
+Baking Powder,1.44,1
+Blood Oranges,3.64,3
+Pumpkin,1.77,4
+Passionfruit,3.97,3
+Extra Virgin Olive Oil,2.18,1
+Banana,1.07,4
+Kombu,0.18,4
+Kiwi Berries,0.86,4
+Cantaloupe,2.44,4
+Butter Beans,1.3,4
+Jelly,1.65,4
+Coconut,1.22,4
+Incaberries,0.8,1
+Snowpeas,3.79,3
+Buckwheat Flour,3.05,2
+Corn Syrup,3.75,3
+Tabasco,1.19,1
+Swiss Chard,3.83,1
+Avocado,3.82,3
+Margarine,3.7,2
+Asian Noodles,1.2,2
+Swordfish,0.86,1
+Bocconcini,2.12,2
+Beef Stock,1.3,3
+Caraway Seed,1.68,3
+Semolina,2.34,4
+Curry Powder,0.11,1
+Cabbage,3.68,1
+Zucchini,2.07,1
+Duck,0.83,1
+Vinegar,3.31,3
+Wattleseed,2.04,3
+Macadamia Oil,2.94,4
+Anchovies,3.4,2
+Tamarillo,0.53,2
+Hot Smoked Salmon,1.57,1
+Dandelion,3.27,3
+Miso,3.44,3
+Jerusalem Artichoke,3.94,4
+Cream,0.37,2
+Chinese Five Spice,0.74,1
+Octopus,0.03,4
+Agar,2.71,1
+White Wine,0.9,1
+Nutmeg,3.4,1
+Poppy Seed,2.64,3
+Apricots,0.52,4
+Fennel,3.47,3
+Sage,2.72,2
+Peppercorns,0.24,1
+Cumquat,1.69,3
+Butter,2.82,4
+Spinach,2.63,1
+Nasturtium,0.13,2
+Oatmeal,2.06,2
+Green Beans,3.72,1
+Flathead,2.75,4
+Pecan Nut,3.78,2
+Papaw,0.74,3
+Raisin,0.26,4
+Starfruit,0.56,3
+Bush Tomato,2.91,3
+Soba,3.83,3
+Snowpea sprouts,0.62,2
+Koshihikari Rice,0.09,2
+Peas,1.42,3
+Buttermilk,2.36,1
+Lotus Root,3.59,3
+Agave Syrup,1.32,2
+Harissa,1.97,2
+Sweet Chilli Sauce,1.62,1
+Asafoetida,2.47,1
+Fenugreek,2.43,4
+Broccolini,1.58,4
+Silverbeet,0.72,4
+Iceberg Lettuce,0.68,4
+Pomegranate,3.57,2
+Beef,3.69,3
+Lavender Flowers,3.56,2
+Nuts,1.22,3
+Nori,0.83,2
+Cornichons,1.27,4
+Olives,1.85,2
+Corn Tortilla,0.74,1
+Sake,3.54,4
+Spring Onions,3.98,1
+Pandanus Leaves,3.36,2
+Wholemeal,2.33,3
+French Eschallots,3.02,2
+Potatoes,0.19,2
+White Wine Vinegar,2.61,3
+Szechuan Pepperberry,1.75,1
+Tuna,2.51,4
+Tofu,3.73,2
+Lemon,3.88,1
+Custard Apples,2.03,2
+Coconut Oil,1.78,4
+Green Tea,0.98,3
+Grapefruit,3.01,3
+Quark Quinc,0.36,1
+Beetroot,2.87,1
+Achacha,2.28,3
+Sea Salt,2.45,4
+Candle Nut,2.63,2
+Stevia,2.74,1
+Mozzarella,2.77,4
+Freekeh,0.27,4
+Prunes,0.01,4
+Morwong,1,1
+Haricot Beans,0.84,2
+Ricemilk,3.18,4
+Redfish,2.12,2
+Wheatgrass Juice,0.94,4
+Oysters,2.96,1
+Warehou,1.5,2
+Sugar,3.31,4
+Peanuts,3.26,1
+Beans,2.73,3
+Bread,1.27,1
+Soy Sauce,0.49,1
+Mulberries,1.75,1
+Chinese Cabbage,0.71,3
+Parsnip,0.94,3
+White Flour,0.09,3
+Goji Berry,0.18,3
+Bonza,2.67,3
+Bean Sprouts,1.29,3
+Kangaroo,0,2
+Capsicum,1.5,4
+Grapes,1.29,2
+Sour Dough Bread,2,1
+Coriander Leaves,0.84,3
+Mangosteens,0.53,2
+Butternut Pumpkin,0.1,3
+Sausages,1.98,3
+Carob Carrot,2.9,4
+Milk,3.25,3

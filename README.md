@@ -49,6 +49,32 @@ npx drizzle-kit generate
 npx drizzle-kit migrate
 ```
 
+## Seeding DB with data
+To populate DB with initial data, we use .csv files imported from provided Google Sheet
+
+Some tables are depending on other tables (foreign keys), and therefore, should be seeded first.
+
+Run below commands from `backend` directory in following order:
+
+```bash
+npm run import:data -- &lt;table_name&gt; &lt;path_to_file_for_import&gt;
+```
+
+```bash
+npm run import:data -- location data/location.csv
+npm run import:data -- role data/role.csv
+npm run import:data -- staff data/staff.csv
+npm run import:data -- location_staff data/location_staff.csv
+npm run import:data -- recipe data/recipe.csv
+npm run import:data -- unit data/unit.csv
+npm run import:data -- ingredient data/ingredient.csv
+npm run import:data -- recipe_ingredient data/recipe_ingredient.csv
+npm run import:data -- modifier data/modifier.csv
+npm run import:data -- option data/option.csv
+npm run import:data -- modifier_option data/modifier_option.csv
+npm run import:data -- menu data/menu.csv
+```
+
 ## Placeholder view
 
 You'll find a placeholder view using the Staff model, which serves only as an example. Feel free to delete, modify, expand, or do whatever else you like with it.
