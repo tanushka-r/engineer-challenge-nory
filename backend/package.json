@@ -1,25 +1,31 @@
 {
   "dependencies": {
     "cors": "^2.8.5",
+    "csv-parser": "^3.2.0",
     "drizzle-kit": "^0.31.1",
     "drizzle-orm": "^0.43.1",
     "express": "^5.1.0",
-    "pg": "^8.16.0"
+    "fs": "^0.0.1-security",
+    "pg": "^8.16.0",
+    "ts-node": "^10.9.2"
   },
   "name": "vite-react-express",
   "version": "1.0.0",
   "description": "This starting point uses Vite+React for the frontend, Express.js for the backend with Drizzle as an ORM+DB migration handler.",
   "main": "index.js",
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.18",
+    "@types/pg": "^8.15.4",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "import:data": "ts-node src/scripts/importData.ts"
   },
   "keywords": [],
   "author": "",
