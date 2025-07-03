@@ -1,3 +1,30 @@
-name
-Add ingredient
-Allergens
+name,price,modifierTypeId
+Taleggio Cheese,3.73,1
+Turmeric,1.66,1
+Vegetable Oil,1.93,1
+Cornichons,2.27,1
+Tea Oil,2.56,1
+French Eschallots,4.02,1
+Tempeh,2.59,1
+Dill,2.42,1
+Fresh Chillies,2.77,1
+Pepitas,2.93,1
+Watermelon,1.84,1
+Sea Salt,3.45,1
+Crustaceans,0,2
+None,0,2
+Sesame,0,2
+Peanut,0,2
+Halal,0,2
+Fish,0,2
+Vegan,0,2
+Celery,0,2
+Mollusc,0,2
+Sulphites,0,2
+Gluten,0,2
+Lupin,0,2
+Nut,0,2
+Mustard,0,2
+Dairy,0,2
+Soy,0,2
+Egg,0,2
