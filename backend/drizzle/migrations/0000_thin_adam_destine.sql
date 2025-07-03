@@ -1,3 +1,14 @@
+CREATE TABLE "delivery" (
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "delivery_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"ingredient_id" integer,
+	"quantity" numeric NOT NULL,
+	"cost" numeric NOT NULL,
+	"staff_id" integer,
+	"location_id" integer,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE "location" (
 	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "location_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
 	"name" varchar NOT NULL,
@@ -67,24 +78,17 @@ CREATE TABLE "recipe_ingredient" (
 CREATE TABLE "modifier" (
 	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "modifier_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
 	"name" varchar NOT NULL,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE "option" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "option_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
-	"name" varchar NOT NULL,
 	"price" numeric NOT NULL,
+	"modifier_type_id" integer,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "modifier_option" (
-	"modifier_id" integer,
-	"option_id" integer,
+CREATE TABLE "modifier_type" (
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "modifier_type_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"name" varchar NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "modifier_option_modifier_id_option_id_pk" PRIMARY KEY("modifier_id","option_id")
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "menu" (
@@ -97,14 +101,54 @@ CREATE TABLE "menu" (
 	CONSTRAINT "menu_recipe_id_location_id_pk" PRIMARY KEY("recipe_id","location_id")
 );
 --> statement-breakpoint
+CREATE TABLE "sale" (
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "sale_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"recipe_id" integer,
+	"location_id" integer,
+	"quantity" numeric NOT NULL,
+	"cost" numeric NOT NULL,
+	"staffId" integer,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "waste" (
+	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "waste_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"ingredient_id" integer,
+	"quantity" numeric NOT NULL,
+	"cost" numeric NOT NULL,
+	"staffId" integer,
+	"location_id" integer,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "stock" (
+	"ingredient_id" integer,
+	"location_id" integer,
+	"quantity" numeric NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	CONSTRAINT "stock_ingredient_id_location_id_pk" PRIMARY KEY("ingredient_id","location_id")
+);
+--> statement-breakpoint
+ALTER TABLE "delivery" ADD CONSTRAINT "delivery_ingredient_id_ingredient_id_fk" FOREIGN KEY ("ingredient_id") REFERENCES "public"."ingredient"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "delivery" ADD CONSTRAINT "delivery_staff_id_staff_id_fk" FOREIGN KEY ("staff_id") REFERENCES "public"."staff"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "delivery" ADD CONSTRAINT "delivery_location_id_location_id_fk" FOREIGN KEY ("location_id") REFERENCES "public"."location"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "staff" ADD CONSTRAINT "staff_role_id_role_id_fk" FOREIGN KEY ("role_id") REFERENCES "public"."role"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "location_staff" ADD CONSTRAINT "location_staff_location_id_location_id_fk" FOREIGN KEY ("location_id") REFERENCES "public"."location"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "location_staff" ADD CONSTRAINT "location_staff_staff_id_staff_id_fk" FOREIGN KEY ("staff_id") REFERENCES "public"."staff"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "ingredient" ADD CONSTRAINT "ingredient_unit_id_unit_id_fk" FOREIGN KEY ("unit_id") REFERENCES "public"."unit"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "recipe_ingredient" ADD CONSTRAINT "recipe_ingredient_recipe_id_recipe_id_fk" FOREIGN KEY ("recipe_id") REFERENCES "public"."recipe"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "recipe_ingredient" ADD CONSTRAINT "recipe_ingredient_ingredient_id_ingredient_id_fk" FOREIGN KEY ("ingredient_id") REFERENCES "public"."ingredient"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "modifier_option" ADD CONSTRAINT "modifier_option_modifier_id_modifier_id_fk" FOREIGN KEY ("modifier_id") REFERENCES "public"."modifier"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "modifier_option" ADD CONSTRAINT "modifier_option_option_id_option_id_fk" FOREIGN KEY ("option_id") REFERENCES "public"."option"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "modifier" ADD CONSTRAINT "modifier_modifier_type_id_modifier_type_id_fk" FOREIGN KEY ("modifier_type_id") REFERENCES "public"."modifier_type"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "menu" ADD CONSTRAINT "menu_recipe_id_recipe_id_fk" FOREIGN KEY ("recipe_id") REFERENCES "public"."recipe"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "menu" ADD CONSTRAINT "menu_location_id_location_id_fk" FOREIGN KEY ("location_id") REFERENCES "public"."location"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "menu" ADD CONSTRAINT "menu_modifier_id_modifier_id_fk" FOREIGN KEY ("modifier_id") REFERENCES "public"."modifier"("id") ON DELETE no action ON UPDATE no action;
+ALTER TABLE "menu" ADD CONSTRAINT "menu_modifier_id_modifier_id_fk" FOREIGN KEY ("modifier_id") REFERENCES "public"."modifier"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "sale" ADD CONSTRAINT "sale_staffId_staff_id_fk" FOREIGN KEY ("staffId") REFERENCES "public"."staff"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "sale" ADD CONSTRAINT "sale_recipe_id_location_id_menu_recipe_id_location_id_fk" FOREIGN KEY ("recipe_id","location_id") REFERENCES "public"."menu"("recipe_id","location_id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "waste" ADD CONSTRAINT "waste_ingredient_id_ingredient_id_fk" FOREIGN KEY ("ingredient_id") REFERENCES "public"."ingredient"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "waste" ADD CONSTRAINT "waste_staffId_staff_id_fk" FOREIGN KEY ("staffId") REFERENCES "public"."staff"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "waste" ADD CONSTRAINT "waste_location_id_location_id_fk" FOREIGN KEY ("location_id") REFERENCES "public"."location"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "stock" ADD CONSTRAINT "stock_ingredient_id_ingredient_id_fk" FOREIGN KEY ("ingredient_id") REFERENCES "public"."ingredient"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "stock" ADD CONSTRAINT "stock_location_id_location_id_fk" FOREIGN KEY ("location_id") REFERENCES "public"."location"("id") ON DELETE no action ON UPDATE no action;

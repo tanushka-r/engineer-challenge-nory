@@ -1,15 +1,8 @@
-import {
-  pgTable,
-  varchar,
-  integer,
-  decimal,
-  timestamp,
-} from 'drizzle-orm/pg-core';
+import { pgTable, varchar, integer, timestamp } from 'drizzle-orm/pg-core';
 
-export const option = pgTable('option', {
+export const modifier_type = pgTable('modifier_type', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar('name').notNull(),
-  price: decimal('price').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

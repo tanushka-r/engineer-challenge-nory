@@ -49,6 +49,9 @@ npx drizzle-kit generate
 npx drizzle-kit migrate
 ```
 
+## DB design
+There is an image of DB entity relationship diagram in `backend/project-assets` for your reference.
+
 ## Seeding DB with data
 To populate DB with initial data, we use .csv files imported from provided Google Sheet
 
@@ -69,10 +72,10 @@ npm run import:data -- recipe data/recipe.csv
 npm run import:data -- unit data/unit.csv
 npm run import:data -- ingredient data/ingredient.csv
 npm run import:data -- recipe_ingredient data/recipe_ingredient.csv
+npm run import:data -- modifier_type data/modifier_type.csv
 npm run import:data -- modifier data/modifier.csv
-npm run import:data -- option data/option.csv
-npm run import:data -- modifier_option data/modifier_option.csv
 npm run import:data -- menu data/menu.csv
+npm run import:data -- stock data/stock.csv
 ```
 
 ## Placeholder view

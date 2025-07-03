@@ -1,4 +1,4 @@
-staffId,name,dob,iban,bic,roleId
+id,name,dob,iban,bic,roleId
 3,Velva Shields,1976-07-30,GB49VHZF63392981589063,AAPUGB21,2
 4,Francesco Schinner,1997-07-01,GB90IBXP65333147911131,ABECGB21,2
 5,Annis Murphy,1973-08-05,GB07WSYW09428726298111,MORLGB2LSMK,1

@@ -5,7 +5,7 @@ import { staff } from './staff';
 
 export const location_staff = pgTable('location_staff', {
   locationId: integer('location_id').references(() => location.id),
-  staffId: integer('staff_id').references(() => staff.staffId),
+  staffId: integer('staff_id').references(() => staff.id),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 }, (table) => [

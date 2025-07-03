@@ -9,7 +9,7 @@ import {
 import { role } from './role';
 
 export const staff = pgTable('staff', {
-  staffId: integer('id').primaryKey().notNull(),
+  id: integer('id').primaryKey().notNull(),
   name: varchar('name').notNull(),
   dob: date('dob').notNull(),
   iban: varchar('iban').notNull(),
