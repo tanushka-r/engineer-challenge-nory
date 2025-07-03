@@ -1,18 +1,52 @@
-import express, { Request, Response } from 'express';
-import { db } from './lib/db';
-import { staff } from './drizzle/schema/staff';
+import express, { Express, Request, Response } from 'express';
+import { errorHandler } from './middleware/error';
+import { ingredientRoute } from './routes/ingredient';
 import cors from 'cors';
+import { z } from 'zod';
 
-const app = express();
+
+const app: Express = express();
 const PORT = 3000;
 
 app.use(cors());
+app.use(express.json());
 
-app.get('/staff', async (req: Request, res: Response) => {
-  const allStaff = await db.select().from(staff);
-  res.json(allStaff);
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).send('The server is running 🏃‍♀️');
 });
+
+app.get('/error', (req, res, next) => {
+  // Throw a normal error to test errorHandler
+  next(new Error('Test error!'));
+});
+
+const schema = z.object({
+  name: z.string(),
+});
+
+app.post('/test-zod', (req, res, next) => {
+  try {
+    schema.parse(req.body);
+    res.send('Valid!');
+  } catch (err) {
+    next(err);
+  }
+});
+
+/**
+ * Error handler middleware
+ */
+app.use(errorHandler);
+
+/**
+ * Assign the API routes to the main app
+ */
+const rootApi = '/api/v1';
+
+app.use(`${rootApi}/ingredients`, ingredientRoute);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });
+
+export default app;
