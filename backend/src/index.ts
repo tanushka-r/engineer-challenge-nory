@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import { errorHandler } from './middleware/error';
 import { ingredientRoute } from './routes/ingredient';
+import { deliveryRoute } from './routes/delivery';
 import cors from 'cors';
 import { z } from 'zod';
 
@@ -44,6 +45,7 @@ app.use(errorHandler);
 const rootApi = '/api/v1';
 
 app.use(`${rootApi}/ingredients`, ingredientRoute);
+app.use(`${rootApi}/deliveries`, deliveryRoute);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);

@@ -27,7 +27,13 @@ npm run dev
 
 The backend should now be listening on http://localhost:3000/, and can leave this running while you develop, as it'll autoload any changes you make. For details on the backend, see the [express js docs](https://expressjs.com/).
 
-Next, set up the frontend (in another terminal):
+Next, set up the frontend:
+
+create `.env` file in `frontend` directory and add following to the file:
+
+`VITE_API_HOST=http://localhost:3000`
+
+run in terminal:
 
 ```bash
 # In the same directory as this README
@@ -60,7 +66,7 @@ Some tables are depending on other tables (foreign keys), and therefore, should 
 Run below commands from `backend` directory in following order:
 
 ```bash
-npm run import:data -- &lt;table_name&gt; &lt;path_to_file_for_import&gt;
+npm run import:data -- <table_name> <path_to_file_for_import>
 ```
 
 ```bash

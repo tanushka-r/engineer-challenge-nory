@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "types": ["node", "react", "react-dom", "vite/client"],
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
