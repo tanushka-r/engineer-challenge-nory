@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from 'express';
 import { errorHandler } from './middleware/error';
 import { ingredientRoute } from './routes/ingredient';
 import { deliveryRoute } from './routes/delivery';
+import { locationRoute } from './routes/location';
+import { staffRoute } from './routes/staff';
 import cors from 'cors';
 import { z } from 'zod';
 
@@ -46,6 +48,8 @@ const rootApi = '/api/v1';
 
 app.use(`${rootApi}/ingredients`, ingredientRoute);
 app.use(`${rootApi}/deliveries`, deliveryRoute);
+app.use(`${rootApi}/locations`, locationRoute);
+app.use(`${rootApi}/staff`, staffRoute);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
