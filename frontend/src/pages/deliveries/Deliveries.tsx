@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import { fetchIngredients } from '../../../api/api';
+import { fetchIngredients, processDelivery } from '../../../api/api';
+import { useGlobalContext } from '../../context/GlobalContext';
 
 import './deliveries.styles.css';
 
@@ -15,6 +16,8 @@ interface Ingredient {
 interface DeliverySummary {
   id: number;
   name: string;
+  quantity?: number;
+  cost?: number;
   total: number;
 }
 
@@ -26,13 +29,18 @@ const Deliveries = () => {
   const [deliverySummary, setDeliverySummary] = useState<DeliverySummary[]>([]);
   const quantityRef = useRef<HTMLInputElement>(null);
 
+  const { currentLocationId, currentStaffId } = useGlobalContext();
+
   useEffect(() => {
     const getIngredients = async () => {
       try {
         const data = await fetchIngredients();
         setIngredients(data);
       } catch (error) {
-        console.error('Error fetching ingredients:', error);
+        if(error instanceof Error) {
+          console.error('Error fetching ingredients:', error.message);
+        }
+        
       } finally {
         setLoading(false);
       }
@@ -43,26 +51,62 @@ const Deliveries = () => {
   const filteredIngredients = ingredients.filter(ingredient =>
     ingredient.name.toLowerCase().includes(search.toLowerCase())
   );
-  const handleAddStock = () => {
+
+  const handleAddStock = async () => {
     const quantityValue = quantityRef.current?.value;
-    if (quantityValue && selected) {
-      const quantity = parseFloat(quantityValue);
-      const cost = parseFloat(selected.cost);
-      const total = quantity * cost;
+    
+    if (!quantityValue || !selected) {
+      return;
+    }
+
+    const quantity = parseFloat(quantityValue);
+    const cost = parseFloat(selected.cost);
+    const total = quantity * cost;
+
+    if (isNaN(quantity) || quantity <= 0) {
+      return;
+    }
+
+    if (!currentLocationId || !currentStaffId) {
+      return;
+    }
+
+    try {
+      await processDelivery({
+        ingredientId: selected.id,
+        quantity: quantity.toString(),
+        cost: total.toString(),
+        staffId: currentStaffId,
+        locationId: currentLocationId
+      });
+
+      if (quantityRef.current) {
+        quantityRef.current.value = '';
+      }
 
       setDeliverySummary(prev => [
         ...prev,
-        { 
+        {
           id: selected.id,
           name: selected.name,
-          total: total 
+          total
         }
       ]);
+
+      setSelected(null);
+    } catch (error) {
+      if(error instanceof Error) {
+        console.error('Error processing delivery:', error.message);
+      }
     }
   };
 
   return (
     <div className="deliveries-container">
+      <div>
+      <p><strong>Location ID:</strong> {currentLocationId}</p>
+      <p><strong>Staff ID:</strong> {currentStaffId}</p>
+    </div>
       <h1>Deliveries</h1>
 
       <div className="panels-container">
@@ -92,26 +136,32 @@ const Deliveries = () => {
             )}
           </div>
         </div>
-        {selected && (
-          <div className="panel selected-ingredient-panel">
-            <h3>Selected Ingredient</h3>
-            <p><strong>Name:</strong> {selected.name}</p>
-            <p><strong>Cost:</strong> {selected.cost}</p>
-            <div className="quantity-input-container">
-              <label htmlFor="quantity" className="quantity-label">Quantity</label>
-              <input
-                id="quantity"
-                type="number"
-                min={0}
-                ref={quantityRef}
-                className="quantity-input"
-              />
-              <button onClick={handleAddStock} className="add-stock-btn">
-                Add Stock
-              </button>
-            </div>
-          </div>
-        )}
+     
+        <div className="panel selected-ingredient-panel">
+          <h3>Selected Ingredient</h3>
+          {selected ? (
+            <>
+              <p><strong>Name:</strong> {selected.name}</p>
+              <p><strong>Cost:</strong> {selected.cost}</p>
+              <div className="quantity-input-container">
+                <label htmlFor="quantity" className="quantity-label">Quantity</label>
+                <input
+                  id="quantity"
+                  type="number"
+                  min={0}
+                  ref={quantityRef}
+                  className="quantity-input"
+                />
+                <button onClick={handleAddStock} className="add-stock-btn">
+                  Add Stock
+                </button>
+              </div>
+            </>
+            ) : (
+            <p>Please select an ingredient from the list.</p>
+          )}
+        </div>
+  
         {deliverySummary.length > 0 && (
           <div className="panel delivery-summary-panel">
             <h2>Total Delivery</h2>

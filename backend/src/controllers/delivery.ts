@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { fetchAllDeliveries, fetchSingleDelivery, createDelivery, removeDelivery} from '../services/delivery';
+import { fetchAllDeliveries, fetchSingleDelivery, createDelivery, removeDelivery } from '../services/delivery';
 import { DeliveryInsert } from '../models/delivery';
 
 export const getDeliveries = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const ingredients = await fetchAllDeliveries();
-    res.json(ingredients);
+    const delivery = await fetchAllDeliveries();
+    res.json(delivery);
   } catch (err) {
     next(err);
   }
@@ -27,8 +27,8 @@ export const getSingleDelivery: RequestHandler = async (req, res, next) => {
 export const postDelivery = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const data = <DeliveryInsert>req.body;
-    const newIngredient = await createDelivery(data);
-    res.status(201).json(newIngredient);
+    const newDelivery = await createDelivery(data);
+    res.status(201).json(newDelivery);
   } catch (err) {
     next(err);
   }
