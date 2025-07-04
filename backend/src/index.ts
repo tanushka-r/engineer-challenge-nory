@@ -5,6 +5,7 @@ import { deliveryRoute } from './routes/delivery';
 import { locationRoute } from './routes/location';
 import { staffRoute } from './routes/staff';
 import { stockRoute } from './routes/stock';
+import { menuRoute } from './routes/menu';
 import cors from 'cors';
 import { z } from 'zod';
 
@@ -56,6 +57,7 @@ app.use(`${rootApi}/deliveries`, deliveryRoute);
 app.use(`${rootApi}/locations`, locationRoute);
 app.use(`${rootApi}/staff`, staffRoute);
 app.use(`${rootApi}/stock`, stockRoute);
+app.use(`${rootApi}/menu`, menuRoute);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
