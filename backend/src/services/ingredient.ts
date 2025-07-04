@@ -7,7 +7,13 @@ import { IngredientInsertSchema, IngredientInsert } from '../models/ingredient';
  * @returns The result of the query as a list of ingredients
  */
 export const fetchAllIngredients = async () => {
-  return execute(sql`SELECT * FROM ingredient`);
+  return execute(sql`
+    SELECT
+    ingredient.*,
+    unit.name AS unit_name
+    FROM ingredient
+    LEFT JOIN unit ON ingredient.unit_id = unit.id;
+  `);
 };
 
 /**
@@ -16,7 +22,14 @@ export const fetchAllIngredients = async () => {
  * @returns The data of a single ingredient records from the database
  */
 export const fetchSingleIngredient = async (id: number) => {
-  const result = await execute(sql`SELECT * FROM ingredient WHERE id = ${id}`);
+  const result = await execute(sql`
+    SELECT
+    ingredient.*,
+    unit.name AS unit_name
+    FROM ingredient
+    LEFT JOIN unit ON ingredient.unit_id = unit.id
+    WHERE ingredient.id = ${id}
+  `);
   return result[0];
 };
 

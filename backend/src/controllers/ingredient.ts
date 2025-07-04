@@ -15,7 +15,9 @@ export const getSingleIngredient: RequestHandler = async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
     const ingredient = await fetchSingleIngredient(id);
-    if (!ingredient) res.status(404).json({ message: 'Not found' });
+    if (!ingredient) {
+      res.status(404).json({ message: 'Not found' });
+    }
     res.json(ingredient);
   } catch (err) {
     next(err);

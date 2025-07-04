@@ -1,0 +1,97 @@
+.deliveries-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.panels-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.panel {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredient-list-panel {
+  max-width: 300px;
+}
+
+.search-bar {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.ingredients-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.loading-text {
+  padding: 0.5rem;
+}
+.ingredient-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  background-color: white;
+  transition: background-color 0.2s ease;
+}
+
+.ingredient-item:hover {
+  background-color: #f9f9f9;
+}
+
+.ingredient-item.selected {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.selected-ingredient-panel {
+  padding: 1rem;
+}
+
+.quantity-input-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.quantity-label {
+  margin-bottom: 0.5rem;
+}
+
+.quantity-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.delivery-summary-panel {
+  padding: 1rem;
+}
+
+.summary-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.summary-item {
+  padding: 0.25rem 0;
+}
