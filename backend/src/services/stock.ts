@@ -1,5 +1,6 @@
 import { sql } from 'drizzle-orm';
 import { execute } from '../lib/db';
+import { StockUpdateMode } from '../types/types';
 
 /**
  * Fetch all stock entries for a given location
@@ -64,16 +65,29 @@ export const createStock = async (ingredientId: number, locationId: number, quan
  * @param ingredientId Ingredient ID
  * @param locationId Location ID
  * @param quantity New quantity to set
+ * @param mode The mode of operation
  * @returns Updated or created stock record
  */
-export const updateStock = async (ingredientId: number, locationId: number, quantity: number) => {
+export const updateStock = async (
+  ingredientId: number,
+  locationId: number,
+  quantity: number,
+  mode: StockUpdateMode = 'overwrite'
+) => {
   const result = await execute(sql`
     INSERT INTO stock (ingredient_id, location_id, quantity, created_at, updated_at)
     VALUES (${ingredientId}, ${locationId}, ${quantity}, DEFAULT, DEFAULT)
     ON CONFLICT (ingredient_id, location_id)
-    DO UPDATE SET quantity = EXCLUDED.quantity, updated_at = now()
+    DO UPDATE SET
+      quantity = CASE
+        WHEN ${mode} = 'increase' THEN stock.quantity + EXCLUDED.quantity
+        WHEN ${mode} = 'decrease' THEN GREATEST(stock.quantity - EXCLUDED.quantity, 0)
+        ELSE EXCLUDED.quantity
+      END,
+      updated_at = now()
     RETURNING *;
   `);
+
   return result[0];
 };
 
