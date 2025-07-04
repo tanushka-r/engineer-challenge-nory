@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, RequestHandler } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { fetchAllIngredients, fetchSingleIngredient, createIngredient, removeIngredient} from '../services/ingredient';
 import { IngredientInsert } from '../models/ingredient';
 
@@ -11,7 +11,7 @@ export const getIngredients = async (req: Request, res: Response, next: NextFunc
   }
 };
 
-export const getSingleIngredient: RequestHandler = async (req, res, next) => {
+export const getSingleIngredient = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = parseInt(req.params.id);
     const ingredient = await fetchSingleIngredient(id);
