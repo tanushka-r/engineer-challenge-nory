@@ -4,6 +4,7 @@ import { ingredientRoute } from './routes/ingredient';
 import { deliveryRoute } from './routes/delivery';
 import { locationRoute } from './routes/location';
 import { staffRoute } from './routes/staff';
+import { stockRoute } from './routes/stock';
 import cors from 'cors';
 import { z } from 'zod';
 
@@ -36,6 +37,10 @@ app.post('/test-zod', (req, res, next) => {
   }
 });
 
+stockRoute.get('/test', (req, res) => {
+  res.json({ message: 'Stock route is working!' });
+});
+
 /**
  * Error handler middleware
  */
@@ -50,6 +55,7 @@ app.use(`${rootApi}/ingredients`, ingredientRoute);
 app.use(`${rootApi}/deliveries`, deliveryRoute);
 app.use(`${rootApi}/locations`, locationRoute);
 app.use(`${rootApi}/staff`, staffRoute);
+app.use(`${rootApi}/stock`, stockRoute);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
