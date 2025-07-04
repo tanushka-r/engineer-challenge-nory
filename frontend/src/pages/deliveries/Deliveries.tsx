@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
-import { fetchIngredients, processDelivery } from '../../../api/api';
+import { fetchIngredients, processDelivery, updateStock } from '../../../api/api';
 import { useGlobalContext } from '../../context/GlobalContext';
+import { STOCK_MODE } from '../../types/types';
 
 import './deliveries.styles.css';
 
@@ -78,6 +79,17 @@ const Deliveries = () => {
         cost: total.toString(),
         staffId: currentStaffId,
         locationId: currentLocationId
+      });
+
+      await updateStock({
+        mode: STOCK_MODE.INCREASE,
+        data: [
+          {
+            ingredientId: selected.id,
+            locationId: currentLocationId,
+            quantity
+          }
+        ]
       });
 
       if (quantityRef.current) {

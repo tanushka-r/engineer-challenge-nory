@@ -7,6 +7,7 @@ import {
   removeStock,
 } from '../services/stock';
 import { parseCommaSeparatedNumbers } from '../lib/utils';
+import type { StockBatchUpdateRequest } from '../types/types';
 
 export const getAllStockForLocation = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -65,11 +66,20 @@ export const postStock = async (req: Request, res: Response, next: NextFunction)
 
 export const putStock = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { ingredientId, locationId, quantity } = req.body;
+    const { data, mode } = req.body as StockBatchUpdateRequest;
 
-    const updated = await updateStock(ingredientId, locationId, quantity);
+    if (!Array.isArray(data) || !mode) {
+      res.status(400).json({ message: 'Both data and mode are required' });
+      return;
+    }
 
-    res.json(updated);
+    const result = [];
+    for (const item of data) {
+      const updated = await updateStock(item.ingredientId, item.locationId, item.quantity, mode);
+      result.push(updated);
+    }
+
+    res.json(result);
   } catch (err) {
     next(err);
   }
@@ -92,4 +102,3 @@ export const deleteStock = async (req: Request, res: Response, next: NextFunctio
     next(err);
   }
 };
-

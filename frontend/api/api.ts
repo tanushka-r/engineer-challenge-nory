@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { StockBatchUpdateRequest } from '../src/types/types';
 
 const API_HOST = import.meta.env.VITE_API_HOST;
 
@@ -47,3 +48,14 @@ export async function processDelivery(deliveryData: {
     throw error;
   }
 }
+
+export async function updateStock(request: StockBatchUpdateRequest) {
+  try {
+    const response = await axios.put(`${API_HOST}/api/v1/stock`, request);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating stock in batch:', error);
+    throw error;
+  }
+}
+
