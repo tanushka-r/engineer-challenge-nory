@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useGlobalContext } from '../../context/GlobalContext';
-import { fetchMenus, checkStockForRecipe, updateStock } from '../../api/api';
+import { fetchMenus, checkStockForRecipe, updateStock, processSale } from '../../api/api';
 import { generateStockUpdatePayload } from '../../lib/utils';
 import Message from '../../components/message/Message';
 
@@ -78,14 +78,18 @@ const Sales = () => {
       return;
     }
 
-    const price = parseFloat(selected.price);
-
     try {
       const stockUpdatePayload = generateStockUpdatePayload(currentItemIngredients, stockToUpdate, STOCK_MODE.DECREASE);
 
-      updateStock(stockUpdatePayload);
+      await updateStock(stockUpdatePayload);
 
-      // TODO: record sale
+      await processSale({
+        recipeId: selected.recipe_id,
+        quantity: "1", // Hardcoded for now, multiple items sale is out of scope of assignment
+        cost: selected.price,
+        staffId: currentStaffId,
+        locationId: currentLocationId
+      });
 
     // setSaleSummary(prev => [
     //   ...prev,

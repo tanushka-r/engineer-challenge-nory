@@ -1,4 +1,4 @@
-import type { RecipeIngredient, StockItem, StockUpdateItem, StockBatchUpdateRequest, StockUpdateMode  } from '../types/types';
+import type { RecipeIngredient, StockItem, StockBatchUpdateRequest, StockUpdateMode  } from '../types/types';
 
 /**
  * Compare ingredient quantities against stock quantities and return those out of stock
