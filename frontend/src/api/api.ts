@@ -60,6 +60,23 @@ export async function processDelivery(deliveryData: {
   }
 }
 
+export async function processSale(saleData: {
+  recipeId: number;
+  quantity: string;
+  cost: string;
+  staffId: number;
+  locationId: number;
+}) {
+  try {
+    const response = await axios.post(`${API_HOST}/api/v1/sales`, saleData);
+    return response.data;
+  } catch (error) {
+    console.error('Error processing sale:', error);
+    throw error;
+  }
+}
+
+
 export async function updateStock(request: StockBatchUpdateRequest) {
   try {
     const response = await axios.put(`${API_HOST}/api/v1/stock`, request);
