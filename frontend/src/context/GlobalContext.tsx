@@ -23,7 +23,7 @@ const GlobalContext = createContext<GlobalContextProps>({
  *  Then, users would be able to attempt to login
  *  Upons successful login, user details and location details would be set in global context
  */
-const LOCATION_ID = 1;
+const LOCATION_ID = 2;
 const USER_ID = 3;
 
 export const useGlobalContext = () => useContext(GlobalContext);

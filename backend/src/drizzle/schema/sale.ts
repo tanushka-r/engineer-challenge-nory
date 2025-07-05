@@ -15,7 +15,7 @@ export const sale = pgTable('sale', {
   locationId: integer('location_id'),
   quantity: decimal('quantity').notNull(),
   cost: decimal('cost').notNull(),
-  staffId: integer('staffId').references(() => staff.id),
+  staffId: integer('staff_id').references(() => staff.id),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 }, (table) => ({
