@@ -3,6 +3,7 @@ import {
   fetchAllDeliveries,
   fetchAllDeliveriesForLocation,
   fetchSingleDelivery,
+  fetchTotalDeliveryCostForLocation,
   createDelivery,
   removeDelivery
 } from '../services/delivery';
@@ -41,6 +42,23 @@ export const getSingleDelivery: RequestHandler = async (req, res, next) => {
       res.status(404).json({ message: 'Not found' });
     }
     res.json(delivery);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getTotalDeliveryCostForLocation = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const locationId = parseInt(req.params.locationId, 10);
+
+    if (isNaN(locationId)) {
+      res.status(400).json({ message: 'locationId is required and must be a number' });
+      return;
+    }
+
+    const totalCost = await fetchTotalDeliveryCostForLocation(locationId);
+
+    res.json({ totalCost });
   } catch (err) {
     next(err);
   }

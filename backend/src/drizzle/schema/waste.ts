@@ -14,7 +14,7 @@ export const waste = pgTable('waste', {
   ingredientId: integer('ingredient_id').references(() => ingredient.id),
   quantity: decimal('quantity').notNull(),
   cost: decimal('cost').notNull(),
-  staffId: integer('staffId').references(() => staff.id),
+  staffId: integer('staff_id').references(() => staff.id),
   locationId: integer('location_id').references(() => location.id),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),

@@ -30,6 +30,21 @@ export const fetchSingleSale = async (id: number) => {
 };
 
 /**
+ * Fetch total cost of all sales for a given location
+ * @param locationId Location ID to filter sales records
+ * @returns Total cost as a number (0 if no sales records)
+ */
+export const fetchTotalSaleCostForLocation = async (locationId: number): Promise<number> => {
+  const result = await execute(sql`
+    SELECT COALESCE(SUM(cost), 0) AS total_cost
+    FROM sale
+    WHERE location_id = ${locationId};
+  `);
+
+  return result.length > 0 ? Number(result[0].total_cost) : 0;
+};
+
+/**
  * Create a sale record in the database in the sale table
  * @param data The sale data
  * @returns The newly created sale from the database
