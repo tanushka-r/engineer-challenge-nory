@@ -12,9 +12,11 @@ export const fetchAllStockForLocation = async (locationId: number) => {
     SELECT
       stock.*,
       ingredient.name AS ingredient_name,
+      unit.name AS unit_name,
       location.name AS location_name
     FROM stock
     LEFT JOIN ingredient ON stock.ingredient_id = ingredient.id
+    LEFT JOIN unit ON ingredient.unit_id = unit.id
     LEFT JOIN location ON stock.location_id = location.id
     WHERE stock.location_id = ${locationId};
   `);
