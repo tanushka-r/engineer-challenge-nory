@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import {
   fetchAllStockForLocation,
   fetchStockByIngredientAndLocation,
+  fetchTotalStockCostForLocation,
   createStock,
   updateStock,
   removeStock,
@@ -51,6 +52,22 @@ export const getStockByIngredientAndLocation = async (req: Request, res: Respons
   }
 };
 
+export const getTotalStockCostForLocation = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const locationId = parseInt(req.params.locationId, 10);
+
+    if (isNaN(locationId)) {
+      res.status(400).json({ message: 'locationId is required and must be a number' });
+      return;
+    }
+
+    const totalCost = await fetchTotalStockCostForLocation(locationId);
+
+    res.json({ totalCost });
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const postStock = async (req: Request, res: Response, next: NextFunction) => {
   try {

@@ -45,6 +45,22 @@ export const fetchStockByIngredientAndLocation = async (ingredientIds: number[],
 };
 
 /**
+ * Fetch total cost of all stock for a given location
+ * @param locationId Location ID to filter stock records
+ * @returns Total cost as a number (0 if no stock records)
+ */
+export const fetchTotalStockCostForLocation = async (locationId: number): Promise<number> => {
+  const result = await execute(sql`
+    SELECT COALESCE(SUM(stock.quantity * ingredient.cost), 0) AS total_cost
+    FROM stock
+    JOIN ingredient ON stock.ingredient_id = ingredient.id
+    WHERE stock.location_id = ${locationId};
+  `);
+
+  return result.length > 0 ? Number(result[0].total_cost) : 0;
+};
+
+/**
  * Create a new stock record
  * @param ingredientId Ingredient ID
  * @param locationId Location ID

@@ -3,6 +3,7 @@ import {
   fetchAllSales,
   fetchAllSalesForLocation,
   fetchSingleSale,
+  fetchTotalSaleCostForLocation,
   createSale,
   removeSale
 } from '../services/sale';
@@ -42,6 +43,23 @@ export const getSingleSale: RequestHandler = async (req, res, next) => {
       return;
     }
     res.json(sale);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getTotalSaleCostForLocation = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const locationId = parseInt(req.params.locationId, 10);
+
+    if (isNaN(locationId)) {
+      res.status(400).json({ message: 'locationId is required and must be a number' });
+      return;
+    }
+
+    const totalCost = await fetchTotalSaleCostForLocation(locationId);
+
+    res.json({ totalCost });
   } catch (err) {
     next(err);
   }

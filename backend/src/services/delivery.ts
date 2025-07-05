@@ -30,6 +30,21 @@ export const fetchSingleDelivery = async (id: number) => {
 };
 
 /**
+ * Fetch total cost of all deliveries for a given location
+ * @param locationId Location ID to filter delivery records
+ * @returns Total cost as a number (0 if no delivery records)
+ */
+export const fetchTotalDeliveryCostForLocation = async (locationId: number): Promise<number> => {
+  const result = await execute(sql`
+    SELECT COALESCE(SUM(cost), 0) AS total_cost
+    FROM delivery
+    WHERE location_id = ${locationId};
+  `);
+
+  return result.length > 0 ? Number(result[0].total_cost) : 0;
+};
+
+/**
  * Create a delivery record in the database in the delivery table
  * @param data The delivery data
  * @returns The newly creted delivery from the database
