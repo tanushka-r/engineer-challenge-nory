@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
-import { fetchIngredients, processDelivery, updateStock } from '../../../api/api';
+import { fetchIngredients, processDelivery } from '../../../api/api';
 import { useGlobalContext } from '../../context/GlobalContext';
-import { STOCK_MODE } from '../../types/types';
+import searchIcon from '../../assets/search.svg';
 
 import './deliveries.styles.css';
 
@@ -81,17 +81,6 @@ const Deliveries = () => {
         locationId: currentLocationId
       });
 
-      await updateStock({
-        mode: STOCK_MODE.INCREASE,
-        data: [
-          {
-            ingredientId: selected.id,
-            locationId: currentLocationId,
-            quantity
-          }
-        ]
-      });
-
       if (quantityRef.current) {
         quantityRef.current.value = '';
       }
@@ -114,49 +103,57 @@ const Deliveries = () => {
   };
 
   return (
-    <div className="deliveries-container">
+    <>
       <div>
       <p><strong>Location ID:</strong> {currentLocationId}</p>
       <p><strong>Staff ID:</strong> {currentStaffId}</p>
-    </div>
+      </div>
       <h1>Deliveries</h1>
 
       <div className="panels-container">
-        <div className="panel ingredient-list-panel">
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search ingredients..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="search-input"
-            />
+        <div className="panel">
+          <div className="panel-header">
+            Items
           </div>
-          <div className="ingredients-list">
-            {loading ? (
-              <p className="loading-text">Loading...</p>
-            ) : (
-              filteredIngredients.map((ingredient) => (
-                <div
-                  key={ingredient.id}
-                  onClick={() => setSelected(ingredient)}
-                  className={`ingredient-item ${selected?.id === ingredient.id ? 'selected' : ''}`}
-                >
-                  {ingredient.name}
-                </div>
-              ))
-            )}
+          <div className="search-bar">
+            <div className="search-input-wrapper">
+              <input
+                type="text"
+                placeholder="Search ingredients..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-input"
+              />
+              <img src={searchIcon} alt="Search" className="search-icon" />
+            </div>
+          </div>
+          <div className="panel-body">
+            <div className="ingredients-list">
+              {loading ? (
+                <p className="loading-text">Loading...</p>
+              ) : (
+                filteredIngredients.map((ingredient) => (
+                  <div
+                    key={ingredient.id}
+                    onClick={() => setSelected(ingredient)}
+                    className={`ingredient-item ${selected?.id === ingredient.id ? 'selected' : ''}`}
+                  >
+                    {ingredient.name}
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         </div>
-     
         <div className="panel selected-ingredient-panel">
-          <h3>Selected Ingredient</h3>
-          {selected ? (
-            <>
-              <p><strong>Name:</strong> {selected.name}</p>
-              <p><strong>Cost:</strong> {selected.cost}</p>
-              <div className="quantity-input-container">
-                <label htmlFor="quantity" className="quantity-label">Quantity</label>
+          <div className="panel-header">
+            Selected Item
+          </div>         
+            <div className="panel-body">
+              <p><strong>Name:</strong> {selected ? selected.name : ''}</p>
+              <p><strong>Cost:</strong> {selected ? selected.cost : ''}</p>
+              <div className="input-container">
+                <label htmlFor="quantity">Quantity</label>
                 <input
                   id="quantity"
                   type="number"
@@ -164,30 +161,32 @@ const Deliveries = () => {
                   ref={quantityRef}
                   className="quantity-input"
                 />
-                <button onClick={handleAddStock} className="add-stock-btn">
-                  Add Stock
-                </button>
               </div>
-            </>
-            ) : (
-            <p>Please select an ingredient from the list.</p>
-          )}
+            </div>
+            <div className="panel-footer">
+              <button onClick={handleAddStock} className="add-stock-btn">
+                Process Delivery
+              </button>
+            </div>
         </div>
-  
-        {deliverySummary.length > 0 && (
           <div className="panel delivery-summary-panel">
-            <h2>Total Delivery</h2>
-            <ul className="summary-list">
-              {deliverySummary.map((item, index) => (
-                <li key={index} className="summary-item">
-                  {item.name} - ${item.total.toFixed(2)}
-                </li>
-              ))}
-            </ul>
+            <div className="panel-header">
+              Delivery Summary
+            </div>
+            <div className="panel-body">
+              {deliverySummary.length > 0 && (
+              <ul className="summary-list">
+                {deliverySummary.map((item, index) => (
+                  <li key={index} className="summary-item">
+                    {item.name} - ${item.total.toFixed(2)}
+                  </li>
+                ))}
+              </ul>
+              )}
+            </div>
           </div>
-        )}
       </div>
-    </div>
+    </>
   );
 };
 

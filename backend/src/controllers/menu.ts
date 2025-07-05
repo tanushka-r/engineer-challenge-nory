@@ -10,9 +10,9 @@ export const getAllMenusForLocation = async (req: Request, res: Response, next: 
       return;
     }
 
-    const stocks = await fetchAllMenusForLocation(locationId);
+    const menus = await fetchAllMenusForLocation(locationId);
 
-    res.json(stocks);
+    res.json(menus);
   } catch (err) {
     next(err);
   }
