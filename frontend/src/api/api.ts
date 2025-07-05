@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { StockBatchUpdateRequest, RecipeIngredient, StockItem } from '../types/types';
+import type { StockBatchUpdateRequest, RecipeIngredient, StockItem, StockUpdateItem } from '../types/types';
 import { getOutOfStockIngredients } from '../lib/utils';
 
 const API_HOST = import.meta.env.VITE_API_HOST;
@@ -76,6 +76,15 @@ export async function processSale(saleData: {
   }
 }
 
+export const fetchAllStockForLocation = async (locationId: number) => {
+  try {
+    const response = await axios.get(`${API_HOST}/api/v1/stock/location/${locationId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all stock for location:', error);
+    throw error;
+  }
+};
 
 export async function updateStock(request: StockBatchUpdateRequest) {
   try {
@@ -130,4 +139,10 @@ export const checkStockForRecipe = async (
   const outOfStock = getOutOfStockIngredients(ingredients, stock);
 
   return { ingredients, stock, outOfStock };
+};
+
+export const recordWaste = async (item: StockUpdateItem) => {
+
+  console.log('Recording waste:', item);
+  // TODO: when API is ready, add the call
 };
