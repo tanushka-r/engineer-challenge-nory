@@ -33,6 +33,16 @@ export async function fetchStaffMember(id: number) {
   }
 }
 
+export async function fetchMenus(locationId: number) {
+  try {
+    const response = await axios.get(`${API_HOST}/api/v1/menu/location/${locationId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching menu for location ${locationId}:`, error);
+    throw error;
+  }
+}
+
 export async function processDelivery(deliveryData: {
   ingredientId: number;
   quantity: string;

@@ -1,0 +1,113 @@
+.sidebar {
+  width: 200px;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sidebar .logo {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.sidebar .logo a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sidebar li {
+  margin: 1rem 0;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: none;
+  background-color: #333;
+  padding: 1rem;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-header .logo a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Hamburger button */
+.hamburger {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu.active,
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 2rem;
+  flex-direction: column;
+  z-index: 1000;
+  display: flex;
+}
+
+.mobile-menu .close-btn {
+  align-self: flex-end;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 2rem 0;
+}
+
+.mobile-menu li {
+  margin: 1.5rem 0;
+}
+
+.mobile-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+/* Responsive tweaks for mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+  }
+}
