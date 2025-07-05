@@ -12,6 +12,7 @@ export const fetchAllStockForLocation = async (locationId: number) => {
     SELECT
       stock.*,
       ingredient.name AS ingredient_name,
+      ingredient.cost AS ingredient_cost,
       unit.name AS unit_name,
       location.name AS location_name
     FROM stock

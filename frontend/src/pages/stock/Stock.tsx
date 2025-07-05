@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useGlobalContext } from '../../context/GlobalContext';
-import { fetchAllStockForLocation, updateStock } from '../../api/api';
+import { fetchAllStockForLocation, updateStock, updateWaste } from '../../api/api';
 import Message from '../../components/message/Message';
 
-import type { StockItemForLocation, StockUpdateItem } from '../../types/types';
+import type { StockItemForLocation, WasteItem } from '../../types/types';
 import { STOCK_MODE } from '../../types/types';
 
 const Stock = () => {
-  const { currentLocationId } = useGlobalContext();
+  const { currentLocationId, currentStaffId } = useGlobalContext();
   const [stockItems, setStockItems] = useState<StockItemForLocation[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingStock, setLoadingStock] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [quantities, setQuantities] = useState<Record<string, string>>({});
@@ -20,7 +20,7 @@ const Stock = () => {
         return;
       }
 
-      setLoading(true);
+      setLoadingStock(true);
       setError(null);
 
       try {
@@ -41,7 +41,7 @@ const Stock = () => {
       } catch (err) {
         setError('Failed to fetch stock data');
       } finally {
-        setLoading(false);
+        setLoadingStock(false);
       }
     };
 
@@ -56,15 +56,17 @@ const Stock = () => {
     }));
   };
 
-  const recordWaste = async (wasteItem: StockUpdateItem) => {
-    // TODO: Implement actual API call to record waste when API available
-    console.log('Recording waste:', wasteItem);
-  };
-
   const handleUpdate = async (ingredientId: number, locationId: number) => {
     const uniqueId = `${ingredientId}-at-${locationId}`;
     const newQuantityStr = quantities[uniqueId];
-    if (newQuantityStr === undefined) return;
+    
+    if (newQuantityStr === undefined){
+      return;
+    }
+
+    // if (currentStaffId === null || currentLocationId === null) {
+    //   return <p>Error: Staff or Location not set.</p>;
+    // }
 
     const newQuantity = Number(newQuantityStr);
 
@@ -76,7 +78,10 @@ const Stock = () => {
     const stockItem = stockItems.find(
       (item) => item.ingredient_id === ingredientId && item.location_id === locationId
     );
-    if (!stockItem) return;
+
+    if (!stockItem) {
+      return;
+    }
 
     const oldQuantity = Number(stockItem.quantity);
 
@@ -85,12 +90,20 @@ const Stock = () => {
     try {
       if (newQuantity < oldQuantity) {
         const wasteQuantity = oldQuantity - newQuantity;
+  
+        if (currentStaffId === null) {
+          throw new Error('Staff ID is not available. Please log in.');
+        }
 
-        await recordWaste({
+        const wastePayload: WasteItem = {
           ingredientId,
           locationId,
           quantity: wasteQuantity,
-        });
+          cost: parseFloat(stockItem.ingredient_cost) * wasteQuantity,
+          staffId: currentStaffId,
+        };
+
+        await updateWaste(wastePayload);
       }
 
       await updateStock({
@@ -123,7 +136,7 @@ const Stock = () => {
     }
   };
 
-  if (loading) {
+  if (loadingStock) {
     return <p>Loading stock data...</p>;
   }
 
