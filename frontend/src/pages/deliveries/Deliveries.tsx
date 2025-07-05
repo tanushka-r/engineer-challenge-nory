@@ -1,26 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
-import { fetchIngredients, processDelivery } from '../../../api/api';
+import { fetchIngredients, processDelivery, updateStock } from '../../api/api';
 import { useGlobalContext } from '../../context/GlobalContext';
+
+import type { Ingredient, DeliverySummary, StockBatchUpdateRequest } from '../../types/types';
+import { STOCK_MODE } from '../../types/types';
+
 import searchIcon from '../../assets/search.svg';
 
 import './deliveries.styles.css';
-
-interface Ingredient {
-  id: number;
-  name: string;
-  cost: string;
-  unit_id: number;
-  created_at: string;
-  updated_at: string;
-}
-
-interface DeliverySummary {
-  id: number;
-  name: string;
-  quantity?: number;
-  cost?: number;
-  total: number;
-}
 
 const Deliveries = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
@@ -73,6 +60,18 @@ const Deliveries = () => {
     }
 
     try {
+      const stockUpdatePayload: StockBatchUpdateRequest = {
+        mode: STOCK_MODE.INCREASE,
+        data: [{
+          ingredientId: selected.id,
+          locationId: currentLocationId,
+          quantity: quantity,
+
+        }],
+      };
+
+      await updateStock(stockUpdatePayload);
+
       await processDelivery({
         ingredientId: selected.id,
         quantity: quantity.toString(),

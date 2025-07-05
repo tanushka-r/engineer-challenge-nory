@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { fetchLocation, fetchStaffMember } from '../../api/api';
+import { fetchLocation, fetchStaffMember } from '../api/api';
 
 interface GlobalContextProps {
   currentLocationId: number | null;

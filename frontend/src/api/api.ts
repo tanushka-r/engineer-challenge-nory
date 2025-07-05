@@ -1,5 +1,6 @@
 import axios from 'axios';
-import type { StockBatchUpdateRequest } from '../src/types/types';
+import type { StockBatchUpdateRequest, RecipeIngredient, StockItem } from '../types/types';
+import { getOutOfStockIngredients } from '../lib/utils';
 
 const API_HOST = import.meta.env.VITE_API_HOST;
 
@@ -69,3 +70,47 @@ export async function updateStock(request: StockBatchUpdateRequest) {
   }
 }
 
+export const fetchRecipeIngredients = async (recipeId: number) => {
+  try {
+    const response = await axios.get(`${API_HOST}/api/v1/recipe-ingredient/${recipeId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting recipe ingredients:', error);
+    throw error;
+  }
+};
+
+export const fetchStockByIngredients = async (ingredientIds: number[], locationId: number | null) => {
+  if (ingredientIds.length === 0) return [];
+
+  const query = ingredientIds.join(',');
+
+  try {
+    const response = await axios.get(
+      `${API_HOST}/api/v1/stock/location/${locationId}/ingredients?ingredientIds=${query}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching stock by ingredient and location:', error);
+    throw error;
+  }
+};
+
+export const checkStockForRecipe = async (
+  recipeId: number,
+  locationId: number | null
+): Promise<{
+  ingredients: RecipeIngredient[];
+  stock: StockItem[];
+  outOfStock: RecipeIngredient[];
+}> => {
+  const ingredients = await fetchRecipeIngredients(recipeId);
+
+  const ingredientIds = ingredients.map((item: RecipeIngredient) => item.ingredient_id);
+
+  const stock = await fetchStockByIngredients(ingredientIds, locationId);
+
+  const outOfStock = getOutOfStockIngredients(ingredients, stock);
+
+  return { ingredients, stock, outOfStock };
+};
