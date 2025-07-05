@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import { errorHandler } from './middleware/error';
 import { ingredientRoute } from './routes/ingredient';
 import { deliveryRoute } from './routes/delivery';
+import { saleRoute } from './routes/sale';
 import { locationRoute } from './routes/location';
 import { staffRoute } from './routes/staff';
 import { stockRoute } from './routes/stock';
@@ -55,6 +56,7 @@ const rootApi = '/api/v1';
 
 app.use(`${rootApi}/ingredients`, ingredientRoute);
 app.use(`${rootApi}/deliveries`, deliveryRoute);
+app.use(`${rootApi}/sales`, saleRoute);
 app.use(`${rootApi}/locations`, locationRoute);
 app.use(`${rootApi}/staff`, staffRoute);
 app.use(`${rootApi}/stock`, stockRoute);

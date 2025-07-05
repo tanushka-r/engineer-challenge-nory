@@ -1,11 +1,33 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { fetchAllDeliveries, fetchSingleDelivery, createDelivery, removeDelivery } from '../services/delivery';
+import {
+  fetchAllDeliveries,
+  fetchAllDeliveriesForLocation,
+  fetchSingleDelivery,
+  createDelivery,
+  removeDelivery
+} from '../services/delivery';
 import { DeliveryInsert } from '../models/delivery';
 
 export const getDeliveries = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const delivery = await fetchAllDeliveries();
     res.json(delivery);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getDeliveriesForLocation = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const locationId = parseInt(req.params.locationId, 10);
+
+    if (isNaN(locationId)) {
+      res.status(400).json({ error: 'Invalid or missing locationId query parameter' });
+      return;
+    }
+
+    const deliveries = await fetchAllDeliveriesForLocation(locationId);
+    res.json(deliveries);
   } catch (err) {
     next(err);
   }

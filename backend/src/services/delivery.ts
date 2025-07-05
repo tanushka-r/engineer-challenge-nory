@@ -11,6 +11,15 @@ export const fetchAllDeliveries = async () => {
 };
 
 /**
+ * Fetch all deliveries for a specific location
+ * @param locationId The ID of the location
+ * @returns The result of the query as a list of deliveries for that location
+ */
+export const fetchAllDeliveriesForLocation = async (locationId: number) => {
+  return execute(sql`SELECT * FROM delivery WHERE location_id = ${locationId}`);
+};
+
+/**
  * Fetch a single delivery using it's given ID
  * @param id The delivery ID
  * @returns The data of a single delivery records from the database
