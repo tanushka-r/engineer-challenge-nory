@@ -38,6 +38,7 @@ export type StockItemForLocation = {
   location_id: number;
   quantity: string;
   ingredient_name: string;
+  ingredient_cost: string;
   unit_name: string;
   location_name: string;
   created_at: string;
@@ -77,4 +78,12 @@ export interface DeliverySummary {
   quantity?: number;
   cost?: number;
   total: number;
+}
+
+export interface WasteItem {
+  ingredientId: number;
+  locationId: number;
+  quantity: number;
+  cost: number;
+  staffId: number;
 }
