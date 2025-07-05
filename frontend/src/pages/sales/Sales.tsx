@@ -1,27 +1,16 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useGlobalContext } from '../../context/GlobalContext';
-import { fetchMenus } from '../../../api/api';
+import { fetchMenus, checkStockForRecipe, updateStock } from '../../api/api';
+import { generateStockUpdatePayload } from '../../lib/utils';
+import Message from '../../components/message/Message';
+
+import type { RecipeIngredient, StockItem, MenuItem, SaleSummary } from '../../types/types';
+import { STOCK_MODE } from '../../types/types';
+
 import searchIcon from '../../assets/search.svg';
 
 import './sales.styles.css';
 
-interface MenuItem {
-  created_at: string;
-  updated_at: string;
-  location_id: number;
-  modifier_id: number;
-  price: string;
-  recipe_id: number;
-  recipe_name: string;
-}
-
-interface SaleSummary {
-  id: number;
-  name: string;
-  quantity?: number;
-  price?: number;
-  total: number;
-}
 
 const Sales = () => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -29,7 +18,10 @@ const Sales = () => {
   const [selected, setSelected] = useState<MenuItem | null>(null);
   const [loading, setLoading] = useState(true);
   const [saleSummary, setSaleSummary] = useState<SaleSummary[]>([]);
-  const quantityRef = useRef<HTMLInputElement>(null);
+  const [currentItemIngredients, setCurrentItemIngredients] = useState<RecipeIngredient[]>([]);
+  const [outOfStockIngredients, setOutOfStockIngredients] = useState<RecipeIngredient[]>([]);
+  const [stockToUpdate, setStockToUpdate] = useState<StockItem[]>([]);
+
 
   const { currentLocationId, currentStaffId } = useGlobalContext();
 
@@ -61,41 +53,48 @@ const Sales = () => {
     item.recipe_name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleAddSale = async () => {
-    const quantityValue = quantityRef.current?.value;
-
-    if (!quantityValue || !selected) {
-      return;
-    }
-
-    const quantity = parseFloat(quantityValue);
-    const price = parseFloat(selected.price);
-    const total = quantity * price;
-
-    if (isNaN(quantity) || quantity <= 0) {
-      return;
-    }
-
-    if (!currentLocationId || !currentStaffId) {
-      return;
-    }
+  const handleSelectItem = async (item: MenuItem) => {
+    setSelected(item);
 
     try {
-      // TODO: Replace with actual sale processing API
-      // Placeholder logic
+      const { ingredients, stock, outOfStock } = await checkStockForRecipe(item.recipe_id, currentLocationId);
 
-      if (quantityRef.current) {
-        quantityRef.current.value = '';
-      }
+      setCurrentItemIngredients(ingredients);
+      setOutOfStockIngredients(outOfStock);
+      setStockToUpdate(stock);
+    
 
-      setSaleSummary(prev => [
-        ...prev,
-        {
-          id: selected.recipe_id,
-          name: selected.recipe_name,
-          total
-        }
-      ]);
+      console.log('Ingredients for selected recipe:', ingredients);
+      console.log("STOCK", stockToUpdate);
+      // TODO: check stock
+    } catch (error) {
+      console.error('Failed to check ingredients in stock:', error);
+    }
+  };
+
+  const handleProcessSale = async () => {
+
+    if (!selected || !currentLocationId || !currentStaffId) {
+      return;
+    }
+
+    const price = parseFloat(selected.price);
+
+    try {
+      const stockUpdatePayload = generateStockUpdatePayload(currentItemIngredients, stockToUpdate, STOCK_MODE.DECREASE);
+
+      updateStock(stockUpdatePayload);
+
+      // TODO: record sale
+
+    // setSaleSummary(prev => [
+    //   ...prev,
+    //   {
+    //     id: selected.recipe_id,
+    //     name: selected.recipe_name,
+    //     price
+    //   }
+    // ]);
 
       setSelected(null);
     } catch (error) {
@@ -138,7 +137,7 @@ const Sales = () => {
                 filteredItems.map((item) => (
                   <div
                     key={item.recipe_id}
-                    onClick={() => setSelected(item)}
+                    onClick={() => handleSelectItem(item)}
                     className={`product-item ${selected?.recipe_id === item.recipe_id ? 'selected' : ''}`}
                   >
                     {item.recipe_name}
@@ -158,23 +157,17 @@ const Sales = () => {
             <>
               <p><strong>Name:</strong> {selected.recipe_name}</p>
               <p><strong>Price:</strong> {selected.price}</p>
-              <div className="quantity-input-container">
-                <label htmlFor="quantity" className="quantity-label">Quantity</label>
-                <input
-                  id="quantity"
-                  type="number"
-                  min={0}
-                  ref={quantityRef}
-                  className="quantity-input"
-                />
-              </div>
+              
+              {outOfStockIngredients.length > 0 && ( 
+                <Message type="error" message="not enough ingredients" />
+              )}
             </>
           ) : (
             <p>Please select a product from the list.</p>
           )}
           </div>
           <div className="panel-footer">
-            <button onClick={handleAddSale} className="add-sale-btn">
+            <button onClick={handleProcessSale} className="add-sale-btn" disabled={outOfStockIngredients.length > 0}>
               Process Sale
             </button>
           </div>
