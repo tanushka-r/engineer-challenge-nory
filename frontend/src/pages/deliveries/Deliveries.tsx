@@ -94,6 +94,7 @@ const Deliveries = () => {
 
       if (quantityRef.current) {
         quantityRef.current.value = '';
+        setIsValidQuantity(false);
       }
 
       setDeliverySummary(prev => [
@@ -159,7 +160,7 @@ const Deliveries = () => {
                 <p><strong>Name:</strong> {selected.name}</p>
                 <p><strong>Cost:</strong> {selected.cost}</p>
                 <div className="input-container">
-                  <label htmlFor="quantity">Quantity</label>
+                  <label htmlFor="quantity">Quantity ({selected.unit_name})</label>
                   <input
                     id="quantity"
                     type="number"

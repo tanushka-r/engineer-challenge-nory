@@ -13,6 +13,13 @@ import {
 
 import './navigation.styles.css';
 
+const navLinksInfo = [
+  { to: '/deliveries', label: 'Deliveries', Icon: DeliveryIcon },
+  { to: '/sales', label: 'Sales', Icon: SaleIcon },
+  { to: '/stock', label: 'Stock', Icon: StockIcon },
+  { to: '/reports', label: 'Reports', Icon: ReportsIcon },
+];
+
 const Navigation: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -32,30 +39,45 @@ const Navigation: React.FC = () => {
           </NavLink>
         </div>
         <ul>
-          <li><Link to="/deliveries">Deliveries</Link></li>
-          <li><Link to="/sales">Sales</Link></li>
-          <li><Link to="/stock">Stock</Link></li>
-          <li><Link to="/reports">Reports</Link></li>
+          {navLinksInfo.map(({ to, label, Icon }) => (
+            <li key={to}>
+              <NavLink
+                to={to}
+                className={({ isActive }) =>
+                  isActive ? 'nav-link selected' : 'nav-link'
+                }
+              >
+                <span className="nav-icon">
+                  <Icon />
+                </span>
+                {label}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
 
-      {/* Mobile header with hamburger */}
+      {/* Mobile header with animated icon */}
       <div className="mobile-header">
         <div className="logo">
-          <Link to="/">LOGO</Link>
+          <NavLink to="/">
+            <Logo />
+          </NavLink>
         </div>
         <button
-          className="hamburger"
+          className={`hamburger ${menuOpen ? 'open' : ''}`}
           onClick={toggleMenu}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
         >
-          ☰
+          <span className="icon-wrapper">
+            {menuOpen ? <CloseIcon /> : <NavigationIcon />}
+          </span>
         </button>
       </div>
 
-      {/* Mobile menu wrapped in nav */}
+      {/* Mobile menu */}
       {menuOpen && (
         <nav
           id="mobile-menu"
@@ -67,13 +89,25 @@ const Navigation: React.FC = () => {
             onClick={closeMenu}
             aria-label="Close menu"
           >
-            ×
+            <CloseIcon />
           </button>
           <ul>
-            <li><Link to="/deliveries" onClick={closeMenu}>Deliveries</Link></li>
-            <li><Link to="/sales" onClick={closeMenu}>Sales</Link></li>
-            <li><Link to="/stock" onClick={closeMenu}>Stock</Link></li>
-            <li><Link to="/reports" onClick={closeMenu}>Reports</Link></li>
+            {navLinksInfo.map(({ to, label, Icon }) => (
+              <li key={to}>
+                <NavLink
+                  to={to}
+                  onClick={closeMenu}
+                  className={({ isActive }) =>
+                    isActive ? 'nav-link selected' : 'nav-link'
+                  }
+                >
+                  <span className="nav-icon">
+                    <Icon />
+                  </span>
+                  {label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </nav>
       )}
