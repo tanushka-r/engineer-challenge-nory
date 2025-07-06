@@ -3,6 +3,7 @@ import { useGlobalContext } from '../../context/GlobalContext';
 import { fetchMenus, checkStockForRecipe, updateStock, processSale } from '../../api/api';
 import { generateStockUpdatePayload } from '../../lib/utils';
 import Message from '../../components/message/Message';
+import SummaryPanel from '../../components/summary-panel/SummaryPanel';
 
 import type { RecipeIngredient, StockItem, MenuItem, SaleSummary } from '../../types/types';
 import { STOCK_MODE } from '../../types/types';
@@ -91,14 +92,14 @@ const Sales = () => {
         locationId: currentLocationId
       });
 
-    // setSaleSummary(prev => [
-    //   ...prev,
-    //   {
-    //     id: selected.recipe_id,
-    //     name: selected.recipe_name,
-    //     price
-    //   }
-    // ]);
+      setSaleSummary(prev => [
+        ...prev,
+        {
+          id: selected.recipe_id,
+          name: selected.recipe_name,
+          total: parseFloat(selected.price), // assuming selected.price is string
+        }
+      ]);
 
       setSelected(null);
     } catch (error) {
@@ -134,21 +135,19 @@ const Sales = () => {
             </div>
           </div>
           <div className="panel-body padding-0">
-            <div className="item-list">
-              {loading ? (
-                <p className="loading-text">Loading...</p>
-              ) : (
+            {loading && <p className="loading-text">Loading...</p>}
+            <ul>
+              {!loading &&
                 filteredItems.map((item) => (
-                  <div
+                  <li
                     key={item.recipe_id}
                     onClick={() => handleSelectItem(item)}
-                    className={`product-item ${selected?.recipe_id === item.recipe_id ? 'selected' : ''}`}
+                    className={`list-item ${selected?.recipe_id === item.recipe_id ? 'selected' : ''}`}
                   >
                     {item.recipe_name}
-                  </div>
-                ))
-              )}
-            </div>
+                  </li>
+                ))}
+            </ul>
           </div>
         </div>
 
@@ -156,38 +155,37 @@ const Sales = () => {
           <div className="panel-header">
             Selected Menu Item
           </div>
-          <div className="panel-body padding-0">
+          <div className="panel-body">
           {selected ? (
             <>
               <p><strong>Name:</strong> {selected.recipe_name}</p>
               <p><strong>Price:</strong> {selected.price}</p>
               
               {outOfStockIngredients.length > 0 && ( 
-                <Message type="error" message="not enough ingredients" />
+                <Message type="error" message="There are not enough ingredients" />
               )}
             </>
           ) : (
-            <p>Please select a product from the list.</p>
+            <Message
+              type="info"
+              message="Please select a product from the list"
+            />
           )}
           </div>
           <div className="panel-footer">
-            <button onClick={handleProcessSale} className="add-sale-btn" disabled={outOfStockIngredients.length > 0}>
+            <button
+              onClick={handleProcessSale}
+              disabled={!selected || outOfStockIngredients.length > 0}
+            >
               Process Sale
             </button>
           </div>
         </div>
-        {saleSummary.length > 0 && (
-          <div className="panel">
-            <h2>Sales Summary</h2>
-            <ul className="summary-list">
-              {saleSummary.map((item, index) => (
-                <li key={index} className="summary-item">
-                  {item.name} - ${item.total.toFixed(2)}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <SummaryPanel
+          data={saleSummary}
+          title="Sales Summary"
+          placeholder="There are no sales yet"
+        />
       </div>
     </div>
   );

@@ -1,5 +1,11 @@
 import axios from 'axios';
-import type { StockBatchUpdateRequest, RecipeIngredient, StockItem, WasteItem, SaleSummary } from '../types/types';
+import type {
+  StockBatchUpdateRequest,
+  RecipeIngredient,
+  StockItem,
+  WasteItem,
+  SaleUpdateRequest
+} from '../types/types';
 import { getOutOfStockIngredients } from '../lib/utils';
 
 const API_HOST = import.meta.env.VITE_API_HOST;
@@ -60,7 +66,7 @@ export async function processDelivery(deliveryData: {
   }
 }
 
-export async function processSale(saleData: SaleSummary) {
+export async function processSale(saleData: SaleUpdateRequest) {
   try {
     const response = await axios.post(`${API_HOST}/api/v1/sales`, saleData);
     return response.data;
@@ -141,6 +147,46 @@ export const updateWaste = async (waste: WasteItem) => {
     return response.data;
   } catch (error) {
     console.error('Error updating waste:', error);
+    throw error;
+  }
+};
+
+export const fetchAllSaleRevenueForLocation = async (locationId: number) => {
+  try {
+    const response = await axios.get(`${API_HOST}/api/v1/sales/location/${locationId}/total-cost`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching total sale revenue for location:', error);
+    throw error;
+  }
+};
+
+export const fetchAllDeliveryCostForLocation = async (locationId: number) => {
+  try {
+    const response = await axios.get(`${API_HOST}/api/v1/deliveries/location/${locationId}/total-cost`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching total delivery cost for location:', error);
+    throw error;
+  }
+};
+
+export const fetchAllWasteCostForLocation = async (locationId: number) => {
+  try {
+    const response = await axios.get(`${API_HOST}/api/v1/waste/location/${locationId}/total-cost`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching total waste cost for location:', error);
+    throw error;
+  }
+};
+
+export const fetchAllStockCostForLocation = async (locationId: number) => {
+  try {
+    const response = await axios.get(`${API_HOST}/api/v1/stock/location/${locationId}/total-cost`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching total stock cost for location:', error);
     throw error;
   }
 };

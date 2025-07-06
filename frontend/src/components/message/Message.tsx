@@ -1,11 +1,12 @@
 interface MessageProps {
   type: string;
   message: string;
+  classNames?: string;
 }
 
-const Message = ({ type, message }: MessageProps) => {
+const Message = ({ type, message, classNames='' }: MessageProps) => {
   return (
-    <div className={`message message-${type}`}>
+    <div className={`message message-${type} ${classNames}`}>
       {message}
     </div>
   );
