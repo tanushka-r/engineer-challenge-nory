@@ -45,9 +45,10 @@ h1 {
   display: flex;
   width: 100%;
   gap: 2rem;
+  flex-wrap: nowrap;
 }
 
-.panel {
+.panel, .report-panel {
   display: flex;
   flex-direction: column;
   background: white;
@@ -175,6 +176,17 @@ button:disabled {
   cursor: not-allowed;
 }
 
+button.secondary {
+  border-color: #4B52DA;
+  color: #4B52DA;
+  background-color: #FFFFFF;
+}
+
+button.secondary:hover {
+  background-color: #4B52DA;
+  color: #FFFFFF;
+}
+
 /* Lists */
 ul {
   list-style-type: none;
@@ -222,12 +234,32 @@ ul {
   border-color: #BF2600;
 }
 
-@media (max-width: 768px) {
-  .panel {
-    width: calc((100% - 16px) / 2);
+@media screen and (max-width: 1140px) {
+
+  .panels-container {
+    flex-wrap: wrap;
   }
 
-  .panel:nth-child(3) {
-    width: 100%;
+  .panels-container .panel:nth-child(3) {
+    flex: 1 1 100%; /* Third panel takes full width */
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+
+  .panels-container {
+    flex-wrap: wrap;
+  }
+
+  .panels-container .panel {
+    flex: 1 1 100%; 
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-top: 75px;
   }
 }

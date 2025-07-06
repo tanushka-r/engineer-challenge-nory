@@ -68,13 +68,6 @@
   align-items: center;
 }
 
-.mobile-header .logo a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
 /* Hamburger button */
 .hamburger {
   background: none;
@@ -108,15 +101,6 @@
   display: flex;
 }
 
-.mobile-menu .close-btn {
-  align-self: flex-end;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
 .mobile-menu ul {
   list-style: none;
   padding: 2rem 0;
@@ -126,10 +110,13 @@
   margin: 1.5rem 0;
 }
 
-.logo a{
+.logo a {
   display: flex;
   gap: 1rem;
   align-items: center;
+  text-decoration: none;
+  color: #344563;
+  font-weight: 600;
 }
 
 .company-name {

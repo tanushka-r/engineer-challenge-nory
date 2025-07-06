@@ -7,6 +7,8 @@ import {
 } from '../../api/api';
 import { useGlobalContext } from '../../context/GlobalContext';
 
+import ReportPanel from '../../components/report-panel/ReportPanel';
+
 import './reports.styles.css';
 
 const Reports = () => {
@@ -71,26 +73,22 @@ const Reports = () => {
     <div className="content-wrapper">
       <h1>Reports</h1>
       <div className="panels-container reports-container">
-        <div className="panel">
-          <div className="panel-body">
-            <p><strong>Sales Revenue:</strong> ${saleRevenue?.toFixed(2)}</p>
-          </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <p><strong>Delivery Cost:</strong> ${deliveryCost?.toFixed(2)}</p>
-          </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <p><strong>Waste Cost:</strong> ${wasteCost?.toFixed(2)}</p>
-          </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <p><strong>Stock Cost:</strong> ${stockCost?.toFixed(2)}</p>
-          </div>
-        </div>
+        <ReportPanel
+          title="Sales Revenue"
+          amount={saleRevenue?.toFixed(2)}
+        />
+        <ReportPanel
+          title="Delivery Cost"
+          amount={deliveryCost?.toFixed(2)}
+        />
+        <ReportPanel
+          title="Waste Cost"
+          amount={wasteCost?.toFixed(2)}
+        />
+        <ReportPanel
+          title="Stock Value"
+          amount={stockCost?.toFixed(2)}
+        />
       </div>
     </div>
   );
