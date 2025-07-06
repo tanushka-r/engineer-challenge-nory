@@ -1,6 +1,13 @@
+import Message from "../../components/message/Message";
+
 const Home = () => {
   return (
-    <div> home content </div>
+    <div className="content-wrapper">
+      <Message
+        type="info"
+        message="This is placeholder, future implementation would allow users to select a location and then login with their credentials"
+      />
+    </div>
   );
 }
 

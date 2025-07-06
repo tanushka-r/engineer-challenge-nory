@@ -107,7 +107,7 @@ CREATE TABLE "sale" (
 	"location_id" integer,
 	"quantity" numeric NOT NULL,
 	"cost" numeric NOT NULL,
-	"staffId" integer,
+	"staff_id" integer,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
@@ -117,7 +117,7 @@ CREATE TABLE "waste" (
 	"ingredient_id" integer,
 	"quantity" numeric NOT NULL,
 	"cost" numeric NOT NULL,
-	"staffId" integer,
+	"staff_id" integer,
 	"location_id" integer,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
@@ -145,10 +145,10 @@ ALTER TABLE "modifier" ADD CONSTRAINT "modifier_modifier_type_id_modifier_type_i
 ALTER TABLE "menu" ADD CONSTRAINT "menu_recipe_id_recipe_id_fk" FOREIGN KEY ("recipe_id") REFERENCES "public"."recipe"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "menu" ADD CONSTRAINT "menu_location_id_location_id_fk" FOREIGN KEY ("location_id") REFERENCES "public"."location"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "menu" ADD CONSTRAINT "menu_modifier_id_modifier_id_fk" FOREIGN KEY ("modifier_id") REFERENCES "public"."modifier"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "sale" ADD CONSTRAINT "sale_staffId_staff_id_fk" FOREIGN KEY ("staffId") REFERENCES "public"."staff"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "sale" ADD CONSTRAINT "sale_staff_id_staff_id_fk" FOREIGN KEY ("staff_id") REFERENCES "public"."staff"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "sale" ADD CONSTRAINT "sale_recipe_id_location_id_menu_recipe_id_location_id_fk" FOREIGN KEY ("recipe_id","location_id") REFERENCES "public"."menu"("recipe_id","location_id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "waste" ADD CONSTRAINT "waste_ingredient_id_ingredient_id_fk" FOREIGN KEY ("ingredient_id") REFERENCES "public"."ingredient"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "waste" ADD CONSTRAINT "waste_staffId_staff_id_fk" FOREIGN KEY ("staffId") REFERENCES "public"."staff"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "waste" ADD CONSTRAINT "waste_staff_id_staff_id_fk" FOREIGN KEY ("staff_id") REFERENCES "public"."staff"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "waste" ADD CONSTRAINT "waste_location_id_location_id_fk" FOREIGN KEY ("location_id") REFERENCES "public"."location"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "stock" ADD CONSTRAINT "stock_ingredient_id_ingredient_id_fk" FOREIGN KEY ("ingredient_id") REFERENCES "public"."ingredient"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "stock" ADD CONSTRAINT "stock_location_id_location_id_fk" FOREIGN KEY ("location_id") REFERENCES "public"."location"("id") ON DELETE no action ON UPDATE no action;
