@@ -15,6 +15,13 @@ export const fetchAllStaff = async () => {
  * @returns The data of a single staff records from the database
  */
 export const fetchSingleStaff = async (id: number) => {
-  const result = await execute(sql`SELECT * FROM staff WHERE id = ${id}`);
+  const result = await execute(sql`
+    SELECT
+      staff.*,
+      role.name AS role_name
+    FROM staff
+    JOIN role ON staff.role_id = role.id
+    WHERE staff.id = ${id}
+  `);
   return result[0];
 };

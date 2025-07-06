@@ -94,5 +94,5 @@ export interface WasteItem {
   locationId: number;
   quantity: number;
   cost: number;
-  staffId: number;
+  staffId: number | null;
 }

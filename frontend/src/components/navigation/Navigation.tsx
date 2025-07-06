@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import { useGlobalContext } from '../../context/GlobalContext'; 
 import {
   DeliveryIcon,
   SaleIcon,
@@ -23,6 +23,8 @@ const navLinksInfo = [
 const Navigation: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const { currentLocation } = useGlobalContext();
+
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
 
@@ -33,6 +35,7 @@ const Navigation: React.FC = () => {
         <div className="logo">
           <NavLink to="/">
             <Logo />
+            <span className="company-name">{currentLocation?.name}</span>
           </NavLink>
         </div>
         <ul>
@@ -81,13 +84,6 @@ const Navigation: React.FC = () => {
           className="mobile-menu"
           aria-label="Mobile navigation menu"
         >
-          <button
-            className="close-btn"
-            onClick={closeMenu}
-            aria-label="Close menu"
-          >
-            <CloseIcon />
-          </button>
           <ul>
             {navLinksInfo.map(({ to, label, Icon }) => (
               <li key={to}>

@@ -57,7 +57,6 @@
   fill: #646CFF;
 }
 
-
 /* Mobile header */
 .mobile-header {
   display: none;
@@ -125,6 +124,16 @@
 
 .mobile-menu li {
   margin: 1.5rem 0;
+}
+
+.logo a{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.company-name {
+  font-size: 16px;
 }
 
 /* Responsive tweaks for mobile */

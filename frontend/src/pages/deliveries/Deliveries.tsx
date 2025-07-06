@@ -115,13 +115,8 @@ const Deliveries = () => {
   };
 
   return (
-    <>
-      <div>
-      <p><strong>Location ID:</strong> {currentLocationId}</p>
-      <p><strong>Staff ID:</strong> {currentStaffId}</p>
-      </div>
+    <div className="content-wrapper">
       <h1>Deliveries</h1>
-
       <div className="panels-container">
         <div className="panel">
           <div className="panel-header">
@@ -198,7 +193,7 @@ const Deliveries = () => {
           placeholder="There are no deliveries yet"
         />
       </div>
-    </>
+    </div>
   );
 };
 
