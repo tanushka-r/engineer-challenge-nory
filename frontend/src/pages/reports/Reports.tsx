@@ -68,25 +68,28 @@ const Reports = () => {
   }
 
   return (
-    <div className="panels-container reports-container">
-      <div className="panel">
-        <div className="panel-body">
-          <p><strong>Sales Revenue:</strong> ${saleRevenue?.toFixed(2)}</p>
+    <div className="content-wrapper">
+      <h1>Reports</h1>
+      <div className="panels-container reports-container">
+        <div className="panel">
+          <div className="panel-body">
+            <p><strong>Sales Revenue:</strong> ${saleRevenue?.toFixed(2)}</p>
+          </div>
         </div>
-      </div>
-      <div className="panel">
-        <div className="panel-body">
-          <p><strong>Delivery Cost:</strong> ${deliveryCost?.toFixed(2)}</p>
+        <div className="panel">
+          <div className="panel-body">
+            <p><strong>Delivery Cost:</strong> ${deliveryCost?.toFixed(2)}</p>
+          </div>
         </div>
-      </div>
-      <div className="panel">
-        <div className="panel-body">
-          <p><strong>Waste Cost:</strong> ${wasteCost?.toFixed(2)}</p>
+        <div className="panel">
+          <div className="panel-body">
+            <p><strong>Waste Cost:</strong> ${wasteCost?.toFixed(2)}</p>
+          </div>
         </div>
-      </div>
-      <div className="panel">
-        <div className="panel-body">
-          <p><strong>Stock Cost:</strong> ${stockCost?.toFixed(2)}</p>
+        <div className="panel">
+          <div className="panel-body">
+            <p><strong>Stock Cost:</strong> ${stockCost?.toFixed(2)}</p>
+          </div>
         </div>
       </div>
     </div>

@@ -149,7 +149,7 @@ const Stock = () => {
   }
 
   return (
-    <div className="stock-container">
+    <div className="content-wrapper">
       <h1>Stock</h1>
       <table className="stock-table">
         <thead>

@@ -1,38 +1,48 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { fetchLocation, fetchStaffMember } from '../api/api';
 
+interface Location {
+  id: number;
+  name: string;
+  address: string;
+  [key: string]: any;
+}
+
+interface Staff {
+  id: number;
+  name: string;
+  roleId?: number | null;
+  roleDescription?: string | null;
+  [key: string]: any;
+}
+
 interface GlobalContextProps {
   currentLocationId: number | null;
-  currentLocationName: string | null;
   currentStaffId: number | null;
-  currentStaffName: string | null;
+  currentLocation: Location | null;
+  currentStaff: Staff | null;
   loading: boolean;
 }
 
 const GlobalContext = createContext<GlobalContextProps>({
   currentLocationId: null,
-  currentLocationName: null,
-  currentStaffName: null,
   currentStaffId: null,
+  currentLocation: null,
+  currentStaff: null,
   loading: true,
 });
 
-/**
- *  Hardcoded location id and user id
- *  Normally, user would be able to coose location from the list of all locations
- *  Then, users would be able to attempt to login
- *  Upons successful login, user details and location details would be set in global context
- */
+// Hardcoded for now
 const LOCATION_ID = 1;
 const USER_ID = 3;
 
 export const useGlobalContext = () => useContext(GlobalContext);
 
 export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentLocationId, setCurrentLocationId] = useState<number>(LOCATION_ID);
-  const [currentStaffId, setCurrentStaffId] = useState<number>(USER_ID);
-  const [currentLocationName, setCurrentLocationName] = useState<string | null>(null);
-  const [currentStaffName, setCurrentStaffName] = useState<string | null>(null);
+  const [currentLocationId] = useState<number>(LOCATION_ID);
+  const [currentStaffId] = useState<number>(USER_ID);
+  const [currentLocation, setCurrentLocation] = useState<Location | null>(null);
+  const [currentStaff, setCurrentStaff] = useState<Staff | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -41,12 +51,12 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         const location = await fetchLocation(currentLocationId);
         const staff = await fetchStaffMember(currentStaffId);
 
-        if (location?.name) {
-          setCurrentLocationName(location.name);
+        if (location) {
+          setCurrentLocation(location);
         }
 
-        if (staff?.name) {
-          setCurrentStaffName(staff.name);
+        if (staff) {
+          setCurrentStaff(staff);
         }
       } catch (error) {
         if (error instanceof Error) {
@@ -64,9 +74,9 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       value={{
         currentLocationId,
         currentStaffId,
-        currentLocationName,
-        currentStaffName,
-        loading
+        currentLocation,
+        currentStaff,
+        loading,
       }}
     >
       {children}

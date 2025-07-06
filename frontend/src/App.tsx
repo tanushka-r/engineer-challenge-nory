@@ -7,18 +7,15 @@ import Deliveries from './pages/deliveries/Deliveries';
 import Sales from './pages/sales/Sales';
 import Stock from './pages/stock/Stock';
 import Reports from './pages/reports/Reports';
+import GlobalHeader from './components/global-header/GlobalHeader';
 
 const App: React.FC = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const closeMenu = () => setMenuOpen(false);
-
   return (
     <Router>
       <div className="app">
         <Navigation />
-          <main className="main-content">
+        <main className="main-content">
+          <GlobalHeader />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/deliveries" element={<Deliveries />} />

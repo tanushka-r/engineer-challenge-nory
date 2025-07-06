@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useGlobalContext } from '../../context/GlobalContext'; 
+import {
+  DeliveryIcon,
+  SaleIcon,
+  StockIcon,
+  ReportsIcon,
+  Logo,
+  NavigationIcon,
+  CloseIcon
+} from '../../assets/icons';
 
 import './navigation.styles.css';
 
 const Navigation: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const { currentLocation } = useGlobalContext();
+
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
 
   return (
@@ -14,7 +26,10 @@ const Navigation: React.FC = () => {
       {/* Sidebar for desktop */}
       <nav className="sidebar" aria-label="Primary navigation">
         <div className="logo">
-          <Link to="/">LOGO</Link>
+          <NavLink to="/">
+            <Logo />
+            <span className="company-name">{currentLocation?.name}</span>
+          </NavLink>
         </div>
         <ul>
           <li><Link to="/deliveries">Deliveries</Link></li>
