@@ -84,13 +84,6 @@ const Navigation: React.FC = () => {
           className="mobile-menu"
           aria-label="Mobile navigation menu"
         >
-          <button
-            className="close-btn"
-            onClick={closeMenu}
-            aria-label="Close menu"
-          >
-            <CloseIcon />
-          </button>
           <ul>
             {navLinksInfo.map(({ to, label, Icon }) => (
               <li key={to}>

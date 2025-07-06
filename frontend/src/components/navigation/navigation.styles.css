@@ -57,7 +57,6 @@
   fill: #646CFF;
 }
 
-
 /* Mobile header */
 .mobile-header {
   display: none;
@@ -125,12 +124,6 @@
 
 .mobile-menu li {
   margin: 1.5rem 0;
-}
-
-.mobile-menu a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
 }
 
 .logo a{
