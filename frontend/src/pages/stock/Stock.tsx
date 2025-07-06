@@ -154,20 +154,22 @@ const Stock = () => {
       <table className="stock-table">
         <thead>
           <tr>
-            <th>Ingredient</th>
             <th>ID</th>
+            <th>Ingredient Name</th>
+            <th>Unit</th>
             <th>Quantity</th>
             <th>Update</th>
           </tr>
         </thead>
         <tbody>
-          {stockItems.map(({ ingredient_id, location_id, ingredient_name }) => {
+          {stockItems.map(({ ingredient_id, location_id, ingredient_name, unit_name }) => {
             const uniqueId = `${ingredient_id}-at-${location_id}`;
 
             return (
               <tr key={uniqueId}>
-                <td>{ingredient_name}</td>
                 <td>{ingredient_id}</td>
+                <td>{ingredient_name}</td>
+                <td>{unit_name}</td>
                 <td>
                   <input
                     type="number"

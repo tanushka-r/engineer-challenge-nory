@@ -76,6 +76,7 @@ export interface Ingredient {
   name: string;
   cost: string;
   unit_id: number;
+  unit_name: string;
   created_at: string;
   updated_at: string;
 }
