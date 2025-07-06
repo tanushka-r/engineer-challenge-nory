@@ -1,0 +1,4 @@
+.panels-container.reports-container {
+  display: flex;
+  flex-direction: row;
+}

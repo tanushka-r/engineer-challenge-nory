@@ -63,6 +63,14 @@ export interface SaleSummary {
   total: number;
 }
 
+export interface SaleUpdateRequest {
+  recipeId: number;
+  quantity: string;
+  cost: string;
+  staffId: number;
+  locationId: number;
+}
+
 export interface Ingredient {
   id: number;
   name: string;

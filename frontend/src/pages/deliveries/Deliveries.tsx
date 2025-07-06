@@ -2,6 +2,9 @@ import { useEffect, useState, useRef } from 'react';
 import { fetchIngredients, processDelivery, updateStock } from '../../api/api';
 import { useGlobalContext } from '../../context/GlobalContext';
 
+import SummaryPanel from '../../components/summary-panel/SummaryPanel';
+import Message from '../../components/message/Message';
+
 import type { Ingredient, DeliverySummary, StockBatchUpdateRequest } from '../../types/types';
 import { STOCK_MODE } from '../../types/types';
 
@@ -15,6 +18,8 @@ const Deliveries = () => {
   const [selected, setSelected] = useState<Ingredient | null>(null);
   const [loading, setLoading] = useState(true);
   const [deliverySummary, setDeliverySummary] = useState<DeliverySummary[]>([]);
+  const [isValidQuantity, setIsValidQuantity] = useState(false);
+
   const quantityRef = useRef<HTMLInputElement>(null);
 
   const { currentLocationId, currentStaffId } = useGlobalContext();
@@ -39,6 +44,13 @@ const Deliveries = () => {
   const filteredIngredients = ingredients.filter(ingredient =>
     ingredient.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleQuantityChange = () => {
+    const valueStr = quantityRef.current?.value ?? '0';
+    const value = parseInt(valueStr, 10);
+    setIsValidQuantity(!isNaN(value) && value > 0);
+  };
+
 
   const handleAddStock = async () => {
     const quantityValue = quantityRef.current?.value;
@@ -126,64 +138,64 @@ const Deliveries = () => {
               <img src={searchIcon} alt="Search" className="search-icon" />
             </div>
           </div>
-          <div className="panel-body">
-            <div className="ingredients-list">
-              {loading ? (
-                <p className="loading-text">Loading...</p>
-              ) : (
+          <div className="panel-body padding-0">
+            {loading && <p className="loading-text">Loading...</p>}
+            <ul>
+              {!loading &&
                 filteredIngredients.map((ingredient) => (
-                  <div
+                  <li
                     key={ingredient.id}
                     onClick={() => setSelected(ingredient)}
-                    className={`ingredient-item ${selected?.id === ingredient.id ? 'selected' : ''}`}
+                    className={`list-item ${selected?.id === ingredient.id ? 'selected' : ''}`}
                   >
                     {ingredient.name}
-                  </div>
-                ))
-              )}
-            </div>
+                  </li>
+                ))}
+            </ul>
           </div>
         </div>
         <div className="panel selected-ingredient-panel">
           <div className="panel-header">
             Selected Item
-          </div>         
-            <div className="panel-body">
-              <p><strong>Name:</strong> {selected ? selected.name : ''}</p>
-              <p><strong>Cost:</strong> {selected ? selected.cost : ''}</p>
-              <div className="input-container">
-                <label htmlFor="quantity">Quantity</label>
-                <input
-                  id="quantity"
-                  type="number"
-                  min={0}
-                  ref={quantityRef}
-                  className="quantity-input"
-                />
-              </div>
-            </div>
-            <div className="panel-footer">
-              <button onClick={handleAddStock} className="add-stock-btn">
-                Process Delivery
-              </button>
-            </div>
-        </div>
-          <div className="panel delivery-summary-panel">
-            <div className="panel-header">
-              Delivery Summary
-            </div>
-            <div className="panel-body">
-              {deliverySummary.length > 0 && (
-              <ul className="summary-list">
-                {deliverySummary.map((item, index) => (
-                  <li key={index} className="summary-item">
-                    {item.name} - ${item.total.toFixed(2)}
-                  </li>
-                ))}
-              </ul>
-              )}
-            </div>
+          </div>      
+          <div className="panel-body">
+            {selected ? (
+              <>
+                <p><strong>Name:</strong> {selected.name}</p>
+                <p><strong>Cost:</strong> {selected.cost}</p>
+                <div className="input-container">
+                  <label htmlFor="quantity">Quantity</label>
+                  <input
+                    id="quantity"
+                    type="number"
+                    min={0}
+                    ref={quantityRef}
+                    onChange={handleQuantityChange}
+                  />
+                </div>
+              </>
+            ) : (
+              <Message
+                type="info"
+                message="Please select a ingredient from the list"
+              />
+            )}
           </div>
+          <div className="panel-footer">
+            <button
+              onClick={handleAddStock}
+              className="add-stock-btn"
+              disabled={!selected || !isValidQuantity}
+              >
+              Process Delivery
+            </button>
+          </div>
+        </div>
+        <SummaryPanel
+          data={deliverySummary}
+          title="Delivery Summary"
+          placeholder="There are no deliveries yet"
+        />
       </div>
     </>
   );

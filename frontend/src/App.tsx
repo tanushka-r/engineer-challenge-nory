@@ -6,6 +6,7 @@ import Home from './pages/home/Home';
 import Deliveries from './pages/deliveries/Deliveries';
 import Sales from './pages/sales/Sales';
 import Stock from './pages/stock/Stock';
+import Reports from './pages/reports/Reports';
 
 const App: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,7 +24,7 @@ const App: React.FC = () => {
             <Route path="/deliveries" element={<Deliveries />} />
             <Route path="/sales" element={<Sales />} />
             <Route path="/stock" element={<Stock />} />
-            <Route path="/reports" element={<div>Reports Content</div>} />
+            <Route path="/reports" element={<Reports />} />
           </Routes>
         </main>
       </div>
