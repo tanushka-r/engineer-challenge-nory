@@ -56,7 +56,9 @@ npx drizzle-kit migrate
 ```
 
 ## DB design
-There is an image of DB entity relationship diagram for your reference - ![DB Diagram](backend/project_assets/project-assets/image.png)
+You can find an image of DB entity relationship diagram for your reference in `backend/project_assets` directory.
+
+![DB Diagram](backend/project_assets/database-er-diagram.png)
 
 ## Seeding DB with data
 To populate DB with initial data, we use .csv files imported from provided Google Sheet
@@ -82,12 +84,32 @@ for example:
 npm run import:data -- location
 ```
 
-## Placeholder view
+## Postman
+There is a Postman collection included in `bakcend/postman` directory, to help test all available API endpoints easily
 
-You'll find a placeholder view using the Staff model, which serves only as an example. Feel free to delete, modify, expand, or do whatever else you like with it.
 
-## What next?
+## PROJECT NOTES:
 
-Up to you! Refer back to the briefing doc.
+What I have done:
 
-Feel free to replace or extend this README or add a separate documentation file of your own for your notes.
+- implemented required functionality as per assignment
+
+
+Tradeoffs (due to time constraints):
+
+In favour of better data modelling and more functionality I did not spent enough time on: 
+
+- design (could do so much more!)
+- frontend (removed as much duplicatioin, did some cleanup but would do much better given more time)
+- testing (only implemented 2 test suits on backend to demonstrate that I know how to do it)
+- manual testing (only teste in Chrome)
+
+
+What would I do differently if I had more time:
+
+- usability
+- accessibility
+- edge cases
+- responsiveness
+- performance
+- manual testing in different browsers (normally use BrowserStack)
