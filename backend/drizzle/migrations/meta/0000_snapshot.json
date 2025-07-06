@@ -1,5 +1,5 @@
 {
-  "id": "34d996d2-7678-4fa6-9acf-1bdc94854c7b",
+  "id": "74493fd9-0e90-4985-ab34-e6979a409680",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -901,8 +901,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "staffId": {
-          "name": "staffId",
+        "staff_id": {
+          "name": "staff_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -924,12 +924,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "sale_staffId_staff_id_fk": {
-          "name": "sale_staffId_staff_id_fk",
+        "sale_staff_id_staff_id_fk": {
+          "name": "sale_staff_id_staff_id_fk",
           "tableFrom": "sale",
           "tableTo": "staff",
           "columnsFrom": [
-            "staffId"
+            "staff_id"
           ],
           "columnsTo": [
             "id"
@@ -998,8 +998,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "staffId": {
-          "name": "staffId",
+        "staff_id": {
+          "name": "staff_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -1040,12 +1040,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "waste_staffId_staff_id_fk": {
-          "name": "waste_staffId_staff_id_fk",
+        "waste_staff_id_staff_id_fk": {
+          "name": "waste_staff_id_staff_id_fk",
           "tableFrom": "waste",
           "tableTo": "staff",
           "columnsFrom": [
-            "staffId"
+            "staff_id"
           ],
           "columnsTo": [
             "id"

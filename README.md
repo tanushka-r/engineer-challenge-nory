@@ -56,7 +56,7 @@ npx drizzle-kit migrate
 ```
 
 ## DB design
-There is an image of DB entity relationship diagram in `backend/project-assets` for your reference.
+There is an image of DB entity relationship diagram for your reference - ![DB Diagram](backend/project_assets/project-assets/image.png)
 
 ## Seeding DB with data
 To populate DB with initial data, we use .csv files imported from provided Google Sheet
@@ -65,23 +65,21 @@ Some tables are depending on other tables (foreign keys), and therefore, should 
 
 Run below commands from `backend` directory in following order:
 
-```bash
-npm run import:data -- <table_name> <path_to_file_for_import>
-```
 
 ```bash
-npm run import:data -- location data/location.csv
-npm run import:data -- role data/role.csv
-npm run import:data -- staff data/staff.csv
-npm run import:data -- location_staff data/location_staff.csv
-npm run import:data -- recipe data/recipe.csv
-npm run import:data -- unit data/unit.csv
-npm run import:data -- ingredient data/ingredient.csv
-npm run import:data -- recipe_ingredient data/recipe_ingredient.csv
-npm run import:data -- modifier_type data/modifier_type.csv
-npm run import:data -- modifier data/modifier.csv
-npm run import:data -- menu data/menu.csv
-npm run import:data -- stock data/stock.csv
+npm run import:data
+```
+
+It will import all tables in required order. Sometimes, you may want to import particular table, then run from `backend` directory:
+
+```bash
+npm run import:data -- <table_name>
+```
+
+for example:
+
+```bash
+npm run import:data -- location
 ```
 
 ## Placeholder view
