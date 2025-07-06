@@ -62,6 +62,7 @@ const Navigation: React.FC = () => {
         <div className="logo">
           <NavLink to="/">
             <Logo />
+            <span className="company-name">{currentLocation?.name}</span>
           </NavLink>
         </div>
         <button

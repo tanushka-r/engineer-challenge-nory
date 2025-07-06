@@ -163,7 +163,7 @@ const Sales = () => {
           ) : (
             <Message
               type="info"
-              message="Please select a product from the list"
+              message="Select a menu item from the list"
             />
           )}
           </div>
@@ -179,7 +179,7 @@ const Sales = () => {
         <SummaryPanel
           data={saleSummary}
           title="Sales Summary"
-          placeholder="There are no sales yet"
+          placeholder="There are no sales"
         />
       </div>
     </div>

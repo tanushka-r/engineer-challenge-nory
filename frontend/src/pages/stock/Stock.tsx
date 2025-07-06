@@ -6,6 +6,8 @@ import Message from '../../components/message/Message';
 import type { StockItemForLocation, WasteItem } from '../../types/types';
 import { STOCK_MODE } from '../../types/types';
 
+import './stock.styles.css';
+
 const Stock = () => {
   const { currentLocationId, currentStaffId } = useGlobalContext();
   const [stockItems, setStockItems] = useState<StockItemForLocation[]>([]);
@@ -63,10 +65,6 @@ const Stock = () => {
     if (newQuantityStr === undefined){
       return;
     }
-
-    // if (currentStaffId === null || currentLocationId === null) {
-    //   return <p>Error: Staff or Location not set.</p>;
-    // }
 
     const newQuantity = Number(newQuantityStr);
 
@@ -183,6 +181,7 @@ const Stock = () => {
                   <button
                     onClick={() => handleUpdate(ingredient_id, location_id)}
                     disabled={updatingId === uniqueId}
+                    className="secondary"
                   >
                     {updatingId === uniqueId ? 'Updating...' : 'Update'}
                   </button>

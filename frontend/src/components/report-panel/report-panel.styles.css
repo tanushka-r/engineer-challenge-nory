@@ -1,0 +1,10 @@
+.report-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #6B778C;
+}
+
+.report-amount {
+  font-size: 28px;
+  margin-bottom: 0.5rem;
+}
