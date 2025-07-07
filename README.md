@@ -183,47 +183,58 @@ I have also did only few tests - unit and e2e, just to demonstrate the ability.
 
 Layout is mostly responsive, but I did not cover some edge cases (but I have noted them). I have only tested it in Chrome browser, in real life projects I use BrowserStack.
 
+
 **WISH LIST**
+
 If I had more time and if I was in real life project setting, I would do following:
 
-Codebase:
+**Codebase:**
+
 - more test coverage (identify what actually needs to be tested)
 - accessibility and usability on frontend
 - better thought out approaches for both frontend and backend
 - performance
 - security
 
-Business and Users:
+**Business and Users:**
+
 - usability testing (maybe there is a research or analytics data available)
 - better understanding of business (how business makes money)
 - better understanding on Users problems we are trying to solve
 - how to combine business goals and user experience to deliver best results
 
-Reports:
+**Reports:**
+
 In this assignment reports are very basic, but it was the part that I would love to work on more.
 
 For example, we could:
+
 - break down data by date
 - analyze waste by ingredient 
 - we could add data point waste_type - e.g spoilage (chicken gone off) or mishandling (coffee spilled by staff), this would allow business to understand how to prevent wastage
 - for sales we could also break down by recipe, for example we could see top 10 best sellers (or worst sellers), which location has most sales
 - we are currently recording cost of delivery at the point of delivery, that is good foundation to allow us to track cost increases (should we change supplier?)
 
-Sales:
+**Sales:**
+
 If I had more time, I would implement feature that when recipe selected we would display all ingredients and for each ingredient we would have a tag "in stock", "low stock" or "out of stock", this would allow staff to see in real time, not just what ingredients they already missing, but what is getting low, so they could place timely orders.
 
 We could also implement "ingredient substitude" feature - for example if customer wants skim milk capuccino, but skim milk is out of stock, we could offer to replace it with full-fat milk, this would allow business to not loose a sale.
 
 Currently I am only processing one recipe sale at a time, I would like to allow user to select multiple recipes and process in single sale.
 
-Deliveries:
+**Deliveries:**
+
 Same as for sales, we only processing one item at a time, I wish I had time to implemnet multiple items delivery.
 
-Stock:
+**Stock:**
+
 I would add indicators that show visually if stock is getting low or if it is too high, as it can be helpful to determine what to order.
 
-Overall:
+**General:**
+
 I wich I had time to implement switching user and location on the interface (see note above about it being hardcoded).
 
 **FINAL NOTE:**
+
 I think this project notes got really long! If you have managed to read through all of this, thank you for reading and reviewing :)
