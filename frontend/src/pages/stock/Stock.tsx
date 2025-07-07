@@ -147,7 +147,7 @@ const Stock = () => {
   }
 
   return (
-    <div className="content-wrapper">
+    <div className="content-wrapper" data-cy="page-stock">
       <h1>Stock</h1>
       <table className="stock-table">
         <thead>

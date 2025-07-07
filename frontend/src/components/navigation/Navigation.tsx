@@ -14,10 +14,10 @@ import {
 import './navigation.styles.css';
 
 const navLinksInfo = [
-  { to: '/deliveries', label: 'Deliveries', Icon: DeliveryIcon },
-  { to: '/sales', label: 'Sales', Icon: SaleIcon },
-  { to: '/stock', label: 'Stock', Icon: StockIcon },
-  { to: '/reports', label: 'Reports', Icon: ReportsIcon },
+  { to: '/deliveries', label: 'Deliveries', dataCy: 'nav-deliveries', Icon: DeliveryIcon },
+  { to: '/sales', label: 'Sales', dataCy: 'nav-sales', Icon: SaleIcon },
+  { to: '/stock', label: 'Stock', dataCy: 'nav-stock', Icon: StockIcon },
+  { to: '/reports', label: 'Reports', dataCy: 'nav-reports', Icon: ReportsIcon },
 ];
 
 const Navigation: React.FC = () => {
@@ -31,21 +31,22 @@ const Navigation: React.FC = () => {
   return (
     <>
       {/* Sidebar for desktop */}
-      <nav className="sidebar" aria-label="Primary navigation">
+      <nav className="sidebar" aria-label="Primary navigation" data-cy="navigation">
         <div className="logo">
-          <NavLink to="/">
+          <NavLink to="/" data-cy="nav-home">
             <Logo />
             <span className="company-name">{currentLocation?.name}</span>
           </NavLink>
         </div>
         <ul>
-          {navLinksInfo.map(({ to, label, Icon }) => (
+          {navLinksInfo.map(({ to, label, Icon, dataCy }) => (
             <li key={to}>
               <NavLink
                 to={to}
                 className={({ isActive }) =>
                   isActive ? 'nav-link selected' : 'nav-link'
                 }
+                data-cy={dataCy}
               >
                 <span className="nav-icon">
                   <Icon />

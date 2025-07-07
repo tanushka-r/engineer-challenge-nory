@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "types": ["node", "react", "react-dom", "vite/client"],
+    "types": ["node", "react", "react-dom", "vite/client", "jest"],
+    "esModuleInterop": true,
   },
   "files": [],
   "references": [

@@ -10,9 +10,6 @@ import { STOCK_MODE } from '../../types/types';
 
 import searchIcon from '../../assets/search.svg';
 
-import './sales.styles.css';
-
-
 const Sales = () => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [search, setSearch] = useState('');
@@ -47,8 +44,6 @@ const Sales = () => {
 
     getMenuItems();
   }, [currentLocationId]);
-  
-  console.log(menuItems);
 
   const filteredItems = menuItems.filter(item =>
     item.recipe_name.toLowerCase().includes(search.toLowerCase())
@@ -63,11 +58,7 @@ const Sales = () => {
       setCurrentItemIngredients(ingredients);
       setOutOfStockIngredients(outOfStock);
       setStockToUpdate(stock);
-    
 
-      console.log('Ingredients for selected recipe:', ingredients);
-      console.log("STOCK", stockToUpdate);
-      // TODO: check stock
     } catch (error) {
       console.error('Failed to check ingredients in stock:', error);
     }
@@ -109,8 +100,16 @@ const Sales = () => {
     }
   };
 
+  const generateOutOfStockMessage = (ingredients: RecipeIngredient[]) => {
+    const items = ingredients.map(item => item.ingredient_name.toLocaleLowerCase()).join(', ');
+    const verb = items.length === 1 ? 'is' : 'are';
+    const message = `There ${verb} not enough ${items}`;
+
+    return message;
+  }
+
   return (
-    <div className="content-wrapper">
+    <div className="content-wrapper" data-cy="page-sales">
       <h1>Sales</h1>
       <div className="panels-container">
         <div className="panel">
@@ -157,7 +156,10 @@ const Sales = () => {
               <p><strong>Price:</strong> {selected.price}</p>
               
               {outOfStockIngredients.length > 0 && ( 
-                <Message type="error" message="There are not enough ingredients" />
+                <Message 
+                  type="error" 
+                  message={generateOutOfStockMessage(outOfStockIngredients)}
+                />
               )}
             </>
           ) : (
