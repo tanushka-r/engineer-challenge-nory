@@ -10,8 +10,6 @@ import { STOCK_MODE } from '../../types/types';
 
 import searchIcon from '../../assets/search.svg';
 
-import './deliveries.styles.css';
-
 const Deliveries = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [search, setSearch] = useState('');
@@ -115,7 +113,7 @@ const Deliveries = () => {
   };
 
   return (
-    <div className="content-wrapper">
+    <div className="content-wrapper" data-cy="page-deliveries">
       <h1>Deliveries</h1>
       <div className="panels-container">
         <div className="panel">

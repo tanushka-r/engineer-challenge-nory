@@ -9,8 +9,6 @@ import { useGlobalContext } from '../../context/GlobalContext';
 
 import ReportPanel from '../../components/report-panel/ReportPanel';
 
-import './reports.styles.css';
-
 const Reports = () => {
   const { currentLocationId } = useGlobalContext();
 
@@ -70,7 +68,7 @@ const Reports = () => {
   }
 
   return (
-    <div className="content-wrapper">
+    <div className="content-wrapper" data-cy="page-reports">
       <h1>Reports</h1>
       <div className="panels-container reports-container">
         <ReportPanel
